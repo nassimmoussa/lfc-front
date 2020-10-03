@@ -1,22 +1,14 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import ROUTER_PATHS from 'constants/router';
-
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { useStyles } from '../../styles';
 
-const LoginForm = () => {
+const ForgotPasswordForm = () => {
   const classes = useStyles();
-  const history = useHistory();
 
   const submitHandler = (e) => {
     e.preventDefault();
-  };
-
-  const redirectToForgotPasswordUpHandler = () => {
-    history.push(ROUTER_PATHS.FORGOT_PASS);
   };
 
   return (
@@ -32,24 +24,6 @@ const LoginForm = () => {
         autoComplete="email"
         autoFocus
       />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="password"
-        label="Senha"
-        type="password"
-        id="password"
-        autoComplete="current-password"
-      />
-      <Button
-        variant="text"
-        color="primary"
-        onClick={redirectToForgotPasswordUpHandler}
-      >
-        Esqueceu a senha?
-      </Button>
 
       <Button
         type="submit"
@@ -58,10 +32,10 @@ const LoginForm = () => {
         color="primary"
         className={classes.submit}
       >
-        login
+        Enviar nova senha
       </Button>
     </form>
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;
