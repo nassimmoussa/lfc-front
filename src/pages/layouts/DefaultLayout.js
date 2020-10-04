@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Appbar from 'components/AppBar';
+
 const DefaultLayout = ({ children }) => {
-  return <>{children}</>;
+  return (
+    <>
+      <Appbar />
+      {children}
+    </>
+  );
 };
 
 DefaultLayout.propTypes = {
