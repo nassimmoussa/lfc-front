@@ -4,6 +4,7 @@ import {
   AUTH_ERROR,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT,
+  AUTH_SIGN_UP_SUCCESS,
 } from 'store/types';
 
 export const initialState = {
@@ -15,6 +16,13 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_SIGN_UP_SUCCESS:
+      return produce(state, (draft) => {
+        draft.isLoading = false;
+        draft.hasLoaded = true;
+        draft.data = action.data;
+      });
+
     case AUTH_LOGIN_SUCCESS:
       return produce(state, (draft) => {
         draft.isLoading = false;
@@ -26,6 +34,7 @@ export default (state = initialState, action) => {
       return produce(state, (draft) => {
         draft.isLoading = true;
         draft.hasLoaded = false;
+        draft.error = {};
       });
 
     case AUTH_ERROR:

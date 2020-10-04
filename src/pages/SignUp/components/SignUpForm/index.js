@@ -1,17 +1,30 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+import {
+  authIsLoadingSelector,
+  authHasErrorSelector,
+  authErrorSelector,
+} from 'store/modules/auth/selectors';
+import { authSignUpLoadAction } from 'store/modules/auth/actions';
 
 import { useStyles } from '../../styles';
 
 const SignUpForm = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const isLoading = useSelector(authIsLoadingSelector);
+  const authHasError = useSelector(authHasErrorSelector);
+  const authError = useSelector(authErrorSelector);
 
   const submitHandler = (values) => {
-    console.log(values);
+    dispatch(authSignUpLoadAction(values));
   };
 
   return (
@@ -119,12 +132,23 @@ const SignUpForm = () => {
               onBlur={handleBlur}
               value={values['password-confirmation']}
             />
+            {authHasError ? (
+              <Typography
+                variant="button"
+                display="block"
+                color="error"
+                align="center"
+              >
+                {authError.message}
+              </Typography>
+            ) : null}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={isLoading}
             >
               Enviar
             </Button>

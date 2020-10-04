@@ -4,6 +4,8 @@ import {
   AUTH_LOGIN_LOAD,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT,
+  AUTH_SIGN_UP_LOAD,
+  AUTH_SIGN_UP_SUCCESS,
 } from 'store/types';
 
 export const authIsLoadingAction = () => ({
@@ -27,4 +29,14 @@ export const authLoginSuccessAction = (data) => ({
 
 export const logoutAction = () => ({
   type: AUTH_LOGOUT,
+});
+
+export const authSignUpLoadAction = (userInfo) => ({
+  type: AUTH_SIGN_UP_LOAD,
+  data: userInfo,
+});
+
+export const authSignUpSuccessAction = (data) => ({
+  type: AUTH_SIGN_UP_SUCCESS,
+  data,
 });
