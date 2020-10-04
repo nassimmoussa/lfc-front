@@ -1,20 +1,33 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import ROUTER_PATHS from 'constants/router';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+import {
+  authIsLoadingSelector,
+  authHasErrorSelector,
+  authErrorSelector,
+} from 'store/modules/auth/selectors';
+import { authLoginLoadAction } from 'store/modules/auth/actions';
 
 import { useStyles } from '../../styles';
 
 const LoginForm = () => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const isLoading = useSelector(authIsLoadingSelector);
+  const authHasError = useSelector(authHasErrorSelector);
+  const authError = useSelector(authErrorSelector);
 
   const submitHandler = (values) => {
-    console.log(values);
+    dispatch(authLoginLoadAction(values));
   };
 
   const redirectToForgotPasswordUpHandler = () => {
@@ -87,12 +100,24 @@ const LoginForm = () => {
               Esqueceu a senha?
             </Button>
 
+            {authHasError ? (
+              <Typography
+                variant="button"
+                display="block"
+                color="error"
+                align="center"
+              >
+                {authError.message}
+              </Typography>
+            ) : null}
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={isLoading}
             >
               login
             </Button>
@@ -104,18 +129,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-// <form className={classes.form} onSubmit={submitHandler} noValidate>
-//         <TextField
-//           variant="outlined"
-//           margin="normal"
-//           required
-//           fullWidth
-//           id="email"
-//           label="E-mail"
-//           name="email"
-//           autoComplete="email"
-//           autoFocus
-//         />
-//
-//       </form>
