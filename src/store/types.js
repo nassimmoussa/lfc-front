@@ -11,3 +11,4 @@ export const AUTH_LOGOUT = `${AUTH}/LOGOUT`;
 
 export const AUTH_SIGN_UP_LOAD = `${AUTH}/SIGN_UP_LOAD`;
 export const AUTH_SIGN_UP_SUCCESS = `${AUTH}/SIGN_UP_SUCCESS`;
+export const AUTH_FORGOT_PASSWORD = `${AUTH}/FORGOT_PASSWORD`;

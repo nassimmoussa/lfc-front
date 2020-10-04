@@ -1,17 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+import { forgotPasswordAction } from 'store/modules/auth/actions';
+
 import { useStyles } from '../../styles';
 
 const ForgotPasswordForm = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const submitHandler = (values) => {
-    console.log(values);
+    dispatch(forgotPasswordAction(values));
   };
 
   return (

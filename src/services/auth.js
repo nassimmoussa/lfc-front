@@ -13,3 +13,10 @@ export const signUpUserService = async ({ password, email, name }) => {
   });
   return data;
 };
+
+export const forgotPasswordService = async ({ email }) => {
+  const { data } = await axios.post('/auth/forgot_pass', {
+    email,
+  });
+  return data;
+};

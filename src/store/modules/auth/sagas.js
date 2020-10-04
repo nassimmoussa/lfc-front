@@ -1,9 +1,20 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { AUTH_LOGIN_LOAD, AUTH_LOGOUT, AUTH_SIGN_UP_LOAD } from 'store/types';
+import {
+  AUTH_LOGIN_LOAD,
+  AUTH_LOGOUT,
+  AUTH_SIGN_UP_LOAD,
+  AUTH_FORGOT_PASSWORD,
+} from 'store/types';
 import ROUTER_PATHS from 'constants/router';
 import history from 'services/history';
-import { loginUserService, signUpUserService } from 'services/auth';
+import {
+  loginUserService,
+  signUpUserService,
+  forgotPasswordService,
+} from 'services/auth';
 import axios from 'utils/axios';
+
+import { successNotificationAction } from 'store/modules/notifications/actions';
 
 import {
   authIsLoadingAction,
@@ -74,11 +85,18 @@ function* signUp({ data }) {
   }
 }
 
+function* forgotPassword({ data }) {
+  forgotPasswordService({ email: data.email });
+  yield put(successNotificationAction('Nova senha enviada por email'));
+  yield call(history.push, ROUTER_PATHS.LOGIN);
+}
+
 const authSagas = [
   takeLatest('persist/REHYDRATE', setAuthHeaders),
   takeLatest(AUTH_LOGIN_LOAD, login),
   takeLatest(AUTH_LOGOUT, logout),
   takeLatest(AUTH_SIGN_UP_LOAD, signUp),
+  takeLatest(AUTH_FORGOT_PASSWORD, forgotPassword),
 ];
 
 export default authSagas;
