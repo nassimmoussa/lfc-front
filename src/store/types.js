@@ -1,5 +1,8 @@
 const AUTH = '@auth';
 
+export const NOTIFICATIONS_ERROR = 'NOTIFICATIONS_ERROR';
+export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
+
 export const AUTH_LOGIN_LOAD = `${AUTH}/LOGIN_LOAD`;
 export const AUTH_LOGIN_SUCCESS = `${AUTH}/LOGIN_SUCCESS`;
 export const AUTH_ERROR = `${AUTH}/ERROR`;
