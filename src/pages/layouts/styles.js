@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import BackgroundImage from 'assets/background.png';
 
 export const useStyles = makeStyles((theme) => {
   return {
@@ -7,7 +8,7 @@ export const useStyles = makeStyles((theme) => {
       display: 'flex',
     },
     loggedOffImage: {
-      backgroundImage: 'url(https://source.unsplash.com/random)',
+      backgroundImage: `url(${BackgroundImage})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       maxWidth: '60%',
