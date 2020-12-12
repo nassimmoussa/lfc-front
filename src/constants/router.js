@@ -4,6 +4,7 @@ const ROUTER_PATHS = {
   SIGN_UP: '/sign_up',
   FORGOT_PASS: '/forgot_pass',
   PROFILE: '/profile',
+  STUDENTS: '/students',
 };
 
 export default ROUTER_PATHS;
