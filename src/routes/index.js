@@ -5,10 +5,17 @@ import Home from 'pages/Home';
 import Login from 'pages/Login';
 import SignUp from 'pages/SignUp';
 import ForgotPassword from 'pages/ForgotPassword';
+import EditProfile from 'pages/profile/Edit';
 import Route from './Route';
 
 const Routes = () => (
   <Switch>
+    <Route
+      exact
+      path={ROUTER_PATHS.PROFILE}
+      component={EditProfile}
+      isPrivate
+    />
     <Route exact path={ROUTER_PATHS.HOME} component={Home} isPrivate />
     <Route path={ROUTER_PATHS.LOGIN} component={Login} />
     <Route path={ROUTER_PATHS.SIGN_UP} component={SignUp} />

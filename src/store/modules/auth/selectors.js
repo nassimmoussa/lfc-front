@@ -27,3 +27,8 @@ export const authHasErrorSelector = createSelector(
   authErrorSelector,
   (error) => !isEmpty(error)
 );
+
+export const userProfileSelector = createSelector(authDataSelector, (data) => ({
+  name: data.name,
+  email: data.email,
+}));

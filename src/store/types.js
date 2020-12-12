@@ -1,4 +1,5 @@
 const AUTH = '@auth';
+const USER = '@user';
 
 export const NOTIFICATIONS_ERROR = 'NOTIFICATIONS_ERROR';
 export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
@@ -12,3 +13,6 @@ export const AUTH_LOGOUT = `${AUTH}/LOGOUT`;
 export const AUTH_SIGN_UP_LOAD = `${AUTH}/SIGN_UP_LOAD`;
 export const AUTH_SIGN_UP_SUCCESS = `${AUTH}/SIGN_UP_SUCCESS`;
 export const AUTH_FORGOT_PASSWORD = `${AUTH}/FORGOT_PASSWORD`;
+
+export const USER_UPDATE_LOAD = `${USER}/UPDATE_LOAD`;
+export const USER_UPDATE_SUCCESS = `${USER}/UPDATE_SUCCESS`;
