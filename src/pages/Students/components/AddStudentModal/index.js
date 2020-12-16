@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import { studentNewAction } from 'store/modules/students/actions';
+
 import StudentForm from '../StudentForm';
 
 const AddStudentModal = ({ open, closeHandler }) => {
+  const dispatch = useDispatch();
   const handleClose = () => {
     closeHandler();
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
+    dispatch(studentNewAction(values));
     handleClose();
   };
 

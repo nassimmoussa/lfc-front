@@ -1,10 +1,16 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { STUDENT_INDEX_LOAD } from 'store/types';
+import { v4 as uuidv4 } from 'uuid';
+import { STUDENT_INDEX_LOAD, STUDENT_NEW } from 'store/types';
+
+import {
+  successNotificationAction,
+  errorNotificationAction,
+} from 'store/modules/notifications/actions';
 
 import {
   studentIsLoadingAction,
-  studentErrorAction,
   studentIndexSuccessAction,
+  studentNewSuccessAction,
 } from './actions';
 
 function* index() {
@@ -18,14 +24,30 @@ function* index() {
 
     yield put(studentIndexSuccessAction(students));
   } catch (e) {
+    yield put(errorNotificationAction('Ocorreu um erro ao buscar os alunos!'));
+  }
+}
+
+function* newStudent({ data }) {
+  yield put(studentIsLoadingAction());
+  try {
+    const savedStudent = {
+      id: uuidv4(),
+      ...data,
+    };
+
+    yield put(studentNewSuccessAction(savedStudent));
+    yield put(successNotificationAction('Aluno adicionado com sucesso!'));
+  } catch (e) {
     yield put(
-      studentErrorAction({
-        message: 'Ocorreu um erro ao buscar os alunos!',
-      })
+      errorNotificationAction('Ocorreu um erro ao adicionar o alunos!')
     );
   }
 }
 
-const studentSaga = [takeLatest(STUDENT_INDEX_LOAD, index)];
+const studentSaga = [
+  takeLatest(STUDENT_INDEX_LOAD, index),
+  takeLatest(STUDENT_NEW, newStudent),
+];
 
 export default studentSaga;

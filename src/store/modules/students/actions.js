@@ -4,6 +4,8 @@ import {
   STUDENT_IS_LOADING,
   STUDENT_INDEX_LOAD,
   STUDENT_CLEANUP,
+  STUDENT_NEW,
+  STUDENT_NEW_SUCCESS,
 } from '../../types';
 
 export const studentIsLoadingAction = () => ({
@@ -26,4 +28,14 @@ export const studentIndexLoadAction = () => ({
 export const studentIndexSuccessAction = (students) => ({
   type: STUDENT_INDEX_SUCCESS,
   data: students,
+});
+
+export const studentNewAction = (studentData) => ({
+  type: STUDENT_NEW,
+  data: studentData,
+});
+
+export const studentNewSuccessAction = (student) => ({
+  type: STUDENT_NEW_SUCCESS,
+  data: student,
 });
