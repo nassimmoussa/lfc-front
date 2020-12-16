@@ -37,4 +37,16 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
   },
+  inputField: {
+    paddingBottom: theme.spacing(2),
+  },
+  cardButtons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  cardButton: {
+    [theme.breakpoints.up('md')]: {
+      minWidth: '180px',
+    },
+  },
 }));

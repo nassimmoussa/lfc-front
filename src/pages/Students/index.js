@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import useModal from 'hooks/useModal';
 
 import StudentsList from './components/StudentsList';
+import AddStudentModal from './components/AddStudentModal';
 
 import { useStyles } from './styles';
 
@@ -14,7 +15,7 @@ const StudentsPage = () => {
     isOpenAddStudentModal,
     closeAddStudentModal,
     openAddStudentModal,
-  ] = useModal();
+  ] = useModal(true);
 
   return (
     <div>
@@ -24,6 +25,10 @@ const StudentsPage = () => {
         </Button>
       </div>
       <StudentsList />
+      <AddStudentModal
+        open={isOpenAddStudentModal}
+        closeHandler={closeAddStudentModal}
+      />
     </div>
   );
 };
