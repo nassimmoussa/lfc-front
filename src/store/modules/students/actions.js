@@ -6,6 +6,8 @@ import {
   STUDENT_CLEANUP,
   STUDENT_NEW,
   STUDENT_NEW_SUCCESS,
+  STUDENT_DELETE,
+  STUDENT_DELETE_SUCCESS,
 } from '../../types';
 
 export const studentIsLoadingAction = () => ({
@@ -38,4 +40,14 @@ export const studentNewAction = (studentData) => ({
 export const studentNewSuccessAction = (student) => ({
   type: STUDENT_NEW_SUCCESS,
   data: student,
+});
+
+export const deleteStudentAction = (studentId) => ({
+  type: STUDENT_DELETE,
+  data: studentId,
+});
+
+export const deleteStudentSuccessAction = (studentId) => ({
+  type: STUDENT_DELETE_SUCCESS,
+  data: studentId,
 });

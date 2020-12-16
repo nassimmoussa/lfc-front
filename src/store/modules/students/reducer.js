@@ -5,6 +5,7 @@ import {
   STUDENT_IS_LOADING,
   STUDENT_INDEX_SUCCESS,
   STUDENT_NEW_SUCCESS,
+  STUDENT_DELETE_SUCCESS,
 } from 'store/types';
 
 export const initialState = {
@@ -16,6 +17,15 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case STUDENT_DELETE_SUCCESS:
+      return produce(state, (draft) => {
+        draft.isLoading = false;
+        draft.hasLoaded = true;
+        draft.data.studentsList = draft.data.studentsList.filter(
+          (student) => student.id !== action.data
+        );
+      });
+
     case STUDENT_NEW_SUCCESS:
       return produce(state, (draft) => {
         draft.isLoading = false;
