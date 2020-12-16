@@ -1,6 +1,11 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { v4 as uuidv4 } from 'uuid';
-import { STUDENT_INDEX_LOAD, STUDENT_NEW, STUDENT_DELETE } from 'store/types';
+import {
+  STUDENT_INDEX_LOAD,
+  STUDENT_NEW,
+  STUDENT_DELETE,
+  STUDENT_EDIT,
+} from 'store/types';
 
 import {
   successNotificationAction,
@@ -12,6 +17,7 @@ import {
   studentIndexSuccessAction,
   studentNewSuccessAction,
   deleteStudentSuccessAction,
+  editStudentSuccessAction,
 } from './actions';
 
 function* index() {
@@ -54,10 +60,21 @@ function* deleteStudent({ data }) {
   }
 }
 
+function* editStudent({ data }) {
+  yield put(studentIsLoadingAction());
+  try {
+    yield put(editStudentSuccessAction(data));
+    yield put(successNotificationAction('Aluno atualizado com sucesso!'));
+  } catch (e) {
+    yield put(errorNotificationAction('Ocorreu um erro ao atualizar o aluno!'));
+  }
+}
+
 const studentSaga = [
   takeLatest(STUDENT_INDEX_LOAD, index),
   takeLatest(STUDENT_NEW, newStudent),
   takeLatest(STUDENT_DELETE, deleteStudent),
+  takeLatest(STUDENT_EDIT, editStudent),
 ];
 
 export default studentSaga;

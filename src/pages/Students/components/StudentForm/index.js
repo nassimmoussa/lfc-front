@@ -10,7 +10,12 @@ import TextField from '@material-ui/core/TextField';
 
 import { useStyles } from '../../styles';
 
-const StudentForm = ({ submitActionProp, closeActionProp, submitBtnText }) => {
+const StudentForm = ({
+  submitActionProp,
+  closeActionProp,
+  submitBtnText,
+  initialValues,
+}) => {
   const classes = useStyles();
 
   const submitHandler = (values) => {
@@ -24,7 +29,7 @@ const StudentForm = ({ submitActionProp, closeActionProp, submitBtnText }) => {
 
   return (
     <Formik
-      initialValues={{ name: '', cpf: '' }}
+      initialValues={initialValues}
       onSubmit={submitHandler}
       validationSchema={Yup.object().shape({
         name: Yup.string().required('Campo obrigatório'),
@@ -105,10 +110,21 @@ const StudentForm = ({ submitActionProp, closeActionProp, submitBtnText }) => {
   );
 };
 
+StudentForm.defaultProps = {
+  initialValues: {
+    name: '',
+    cpf: '',
+  },
+};
+
 StudentForm.propTypes = {
   submitActionProp: PropTypes.func.isRequired,
   closeActionProp: PropTypes.func.isRequired,
   submitBtnText: PropTypes.string.isRequired,
+  initialValues: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    cpf: PropTypes.string.isRequired,
+  }),
 };
 
 export default StudentForm;

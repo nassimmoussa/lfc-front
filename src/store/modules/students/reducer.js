@@ -6,6 +6,9 @@ import {
   STUDENT_INDEX_SUCCESS,
   STUDENT_NEW_SUCCESS,
   STUDENT_DELETE_SUCCESS,
+  STUDENT_SELECT,
+  STUDENT_CLEAR_SELECT,
+  STUDENT_EDIT_SUCCESS,
 } from 'store/types';
 
 export const initialState = {
@@ -17,6 +20,23 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case STUDENT_EDIT_SUCCESS:
+      return produce(state, (draft) => {
+        draft.data.studentsList = draft.data.studentsList.map((student) =>
+          student.id !== action.data.id ? student : action.data
+        );
+      });
+
+    case STUDENT_CLEAR_SELECT:
+      return produce(state, (draft) => {
+        delete draft.data.selectedStudent;
+      });
+
+    case STUDENT_SELECT:
+      return produce(state, (draft) => {
+        draft.data.selectedStudent = action.data;
+      });
+
     case STUDENT_DELETE_SUCCESS:
       return produce(state, (draft) => {
         draft.isLoading = false;

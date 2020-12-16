@@ -11,7 +11,10 @@ import useModal from 'hooks/useModal';
 
 import { format } from 'helpers/formatter';
 
-import { deleteStudentAction } from 'store/modules/students/actions';
+import {
+  deleteStudentAction,
+  selectStudentAction,
+} from 'store/modules/students/actions';
 
 import { useStyles } from '../../styles';
 
@@ -25,6 +28,10 @@ const StudentListItem = ({ student }) => {
     deleteModalClose();
   };
 
+  const editClickHandler = () => {
+    dispatch(selectStudentAction(student));
+  };
+
   return (
     <>
       <Paper className={classes.listItem}>
@@ -35,7 +42,11 @@ const StudentListItem = ({ student }) => {
           CPF: {format(student.cpf, '999.999.999-99')}
         </Typography>
         <div className={classes.buttonsContainer}>
-          <Button color="primary" variant="contained">
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={editClickHandler}
+          >
             Editar
           </Button>
           <Button

@@ -32,3 +32,8 @@ export const studentsListSelector = createSelector(
   studentsDataSelector,
   (data) => data.studentsList || []
 );
+
+export const selectedStudentSelector = createSelector(
+  studentsDataSelector,
+  (data) => data.selectedStudent
+);

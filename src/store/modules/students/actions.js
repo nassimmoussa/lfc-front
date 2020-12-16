@@ -8,6 +8,10 @@ import {
   STUDENT_NEW_SUCCESS,
   STUDENT_DELETE,
   STUDENT_DELETE_SUCCESS,
+  STUDENT_SELECT,
+  STUDENT_CLEAR_SELECT,
+  STUDENT_EDIT,
+  STUDENT_EDIT_SUCCESS,
 } from '../../types';
 
 export const studentIsLoadingAction = () => ({
@@ -50,4 +54,24 @@ export const deleteStudentAction = (studentId) => ({
 export const deleteStudentSuccessAction = (studentId) => ({
   type: STUDENT_DELETE_SUCCESS,
   data: studentId,
+});
+
+export const selectStudentAction = (student) => ({
+  type: STUDENT_SELECT,
+  data: student,
+});
+
+export const clearSelectedStudentAction = (student) => ({
+  type: STUDENT_CLEAR_SELECT,
+  data: student,
+});
+
+export const editStudentAction = (student) => ({
+  type: STUDENT_EDIT,
+  data: student,
+});
+
+export const editStudentSuccessAction = (student) => ({
+  type: STUDENT_EDIT_SUCCESS,
+  data: student,
 });

@@ -12,6 +12,7 @@ import {
 
 import StudentsList from './components/StudentsList';
 import AddStudentModal from './components/AddStudentModal';
+import EditStudentModal from './components/EditStudentModal';
 
 import { useStyles } from './styles';
 
@@ -43,6 +44,7 @@ const StudentsPage = () => {
         open={isOpenAddStudentModal}
         closeHandler={closeAddStudentModal}
       />
+      <EditStudentModal />
     </div>
   );
 };
