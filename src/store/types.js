@@ -1,5 +1,6 @@
 const AUTH = '@auth';
 const USER = '@user';
+const STUDENT = '@student';
 
 export const NOTIFICATIONS_ERROR = 'NOTIFICATIONS_ERROR';
 export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
@@ -16,3 +17,9 @@ export const AUTH_FORGOT_PASSWORD = `${AUTH}/FORGOT_PASSWORD`;
 
 export const USER_UPDATE_LOAD = `${USER}/UPDATE_LOAD`;
 export const USER_UPDATE_SUCCESS = `${USER}/UPDATE_SUCCESS`;
+
+export const STUDENT_INDEX_LOAD = `${STUDENT}/INDEX_LOAD`;
+export const STUDENT_INDEX_SUCCESS = `${STUDENT}/INDEX_SUCCESS`;
+export const STUDENT_ERROR = `${STUDENT}/ERROR`;
+export const STUDENT_IS_LOADING = `${STUDENT}/IS_LOADING`;
+export const STUDENT_CLEANUP = `${STUDENT}/CLEANUP`;
