@@ -2,9 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import ConfirmModal from 'components/ConfirmModal';
 import useModal from 'hooks/useModal';
@@ -18,7 +20,7 @@ import {
 
 import { useStyles } from '../../styles';
 
-const StudentListItem = ({ student }) => {
+const StudentTableItem = ({ student }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [deleteModalIsOpen, deleteModalClose, deleteModalOpen] = useModal();
@@ -34,30 +36,18 @@ const StudentListItem = ({ student }) => {
 
   return (
     <>
-      <Paper className={classes.listItem}>
-        <Typography variant="h5" align="left" gutterBottom>
-          nome: {student.name}
-        </Typography>
-        <Typography variant="subtitle1" align="left" gutterBottom>
-          CPF: {format(student.cpf, '999.999.999-99')}
-        </Typography>
-        <div className={classes.buttonsContainer}>
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={editClickHandler}
-          >
-            Editar
+      <TableRow hover role="checkbox" tabIndex={-1}>
+        <TableCell>{student.name}</TableCell>
+        <TableCell>{format(student.cpf, '999.999.999-99')}</TableCell>
+        <TableCell>
+          <Button onClick={editClickHandler} className={classes.editButton}>
+            <EditIcon />
           </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            onClick={deleteModalOpen}
-          >
-            Excluir
+          <Button onClick={deleteModalOpen} className={classes.deleteButton}>
+            <DeleteIcon />
           </Button>
-        </div>
-      </Paper>
+        </TableCell>
+      </TableRow>
       <ConfirmModal
         open={deleteModalIsOpen}
         closeHandler={deleteModalClose}
@@ -71,7 +61,7 @@ const StudentListItem = ({ student }) => {
   );
 };
 
-StudentListItem.propTypes = {
+StudentTableItem.propTypes = {
   student: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -79,4 +69,4 @@ StudentListItem.propTypes = {
   }).isRequired,
 };
 
-export default StudentListItem;
+export default StudentTableItem;

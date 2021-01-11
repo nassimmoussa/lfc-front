@@ -21,21 +21,17 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
-  listContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    [theme.breakpoints.down('xs')]: {
-      display: 'block',
-    },
+  tablePaper: {
+    width: '80%',
+    margin: 'auto',
   },
-  listItem: {
-    margin: theme.spacing(3),
-    minWidth: '300px',
-    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`,
+  editButton: {
+    color: theme.palette.primary.main,
+    padding: 0,
   },
-  buttonsContainer: {
-    display: 'flex',
-    justifyContent: 'space-around',
+  deleteButton: {
+    color: theme.palette.secondary.light,
+    padding: 0,
   },
   inputField: {
     paddingBottom: theme.spacing(2),
