@@ -1,9 +1,20 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
+
+import LogicExpressionsList from './components/LogicExpressionsList';
+
+import { useStyles } from './styles';
+
 const LogicExpressions = () => {
+  const classes = useStyles();
+
   return (
     <div>
-      <h2>Logic Expressions</h2>
+      <div className={classes.navRight}>
+        <Button className={classes.addButton}>+ NOVA EXPRESSÃO</Button>
+      </div>
+      <LogicExpressionsList />
     </div>
   );
 };
