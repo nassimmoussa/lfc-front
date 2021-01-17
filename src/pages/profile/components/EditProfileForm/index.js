@@ -147,7 +147,7 @@ const EditProfileForm = () => {
               className={classes.submit}
               disabled={isLoading}
             >
-              Enviar
+              Salvar
             </Button>
           </form>
         );

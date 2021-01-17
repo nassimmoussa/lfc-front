@@ -37,9 +37,9 @@ const StudentsList = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell style={{ minWidth: 100 }}>Nome</TableCell>
-              <TableCell style={{ minWidth: 100 }}>CPF</TableCell>
-              <TableCell style={{ minWidth: 100 }}>Ações</TableCell>
+              <TableCell style={{ minWidth: 240 }}>Nome</TableCell>
+              <TableCell style={{ minWidth: 160 }}>CPF</TableCell>
+              <TableCell style={{ minWidth: 80 }}>Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
