@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import HomeIcon from '@material-ui/icons/Home';
 import StudentIcon from '@material-ui/icons/SupervisorAccount';
+import FunctionsIcon from '@material-ui/icons/Functions';
 
 import { useStyles } from './styles';
 
@@ -52,6 +53,18 @@ const SidebarList = ({ closeDrawer }) => {
             <StudentIcon />
           </ListItemIcon>
           <ListItemText primary="Alunos" />
+        </ListItem>
+
+        <ListItem
+          button
+          disabled={location.pathname === ROUTER_PATHS.LOGIC_EXPRESSIONS}
+          selected={location.pathname === ROUTER_PATHS.LOGIC_EXPRESSIONS}
+          onClick={() => redirect(ROUTER_PATHS.LOGIC_EXPRESSIONS)}
+        >
+          <ListItemIcon>
+            <FunctionsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Expressões lógica" />
         </ListItem>
       </List>
     </div>

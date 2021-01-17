@@ -5,6 +5,7 @@ const ROUTER_PATHS = {
   FORGOT_PASS: '/forgot_pass',
   PROFILE: '/profile',
   STUDENTS: '/students',
+  LOGIC_EXPRESSIONS: '/logic_expressions',
 };
 
 export default ROUTER_PATHS;

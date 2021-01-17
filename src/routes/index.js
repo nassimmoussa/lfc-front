@@ -7,10 +7,18 @@ import SignUp from 'pages/SignUp';
 import ForgotPassword from 'pages/ForgotPassword';
 import EditProfile from 'pages/profile/Edit';
 import Students from 'pages/Students';
+import LogicExpressions from 'pages/LogicExpressions';
 import Route from './Route';
 
 const Routes = () => (
   <Switch>
+    <Route
+      exact
+      path={ROUTER_PATHS.LOGIC_EXPRESSIONS}
+      component={LogicExpressions}
+      isPrivate
+    />
+
     <Route exact path={ROUTER_PATHS.STUDENTS} component={Students} isPrivate />
     <Route
       exact
