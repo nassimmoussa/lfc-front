@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { lEsListSelector } from 'store/modules/logicExpressions/selectors';
 
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -16,35 +19,7 @@ const LogicExpressionsList = () => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const logicExpressions = [
-    {
-      id: '1',
-      text: 'x < y',
-      variables: [
-        { name: 'x', value: '1' },
-        { name: 'y', value: '2' },
-      ],
-      result: true,
-    },
-    {
-      id: '2',
-      text: 'x < y && x > 0',
-      variables: [
-        { name: 'x', value: '1' },
-        { name: 'y', value: '2' },
-      ],
-      result: true,
-    },
-    {
-      id: '3',
-      text: 'x < y && x < 0',
-      variables: [
-        { name: 'x', value: '1' },
-        { name: 'y', value: '2' },
-      ],
-      result: false,
-    },
-  ];
+  const logicExpressions = useSelector(lEsListSelector);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
