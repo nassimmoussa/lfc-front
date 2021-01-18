@@ -17,7 +17,7 @@ import { useStyles } from './styles';
 const LogicExpressions = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [isOpenAddLEModal, closeAddLEModal, openAddLEModal] = useModal(true);
+  const [isOpenAddLEModal, closeAddLEModal, openAddLEModal] = useModal();
 
   useEffect(() => {
     dispatch(lEIndexLoadAction());

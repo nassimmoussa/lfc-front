@@ -1,10 +1,17 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { v4 as uuidv4 } from 'uuid';
-import { LE_INDEX_LOAD } from 'store/types';
+import { LE_INDEX_LOAD, LE_DELETE } from 'store/types';
 
-import { errorNotificationAction } from 'store/modules/notifications/actions';
+import {
+  errorNotificationAction,
+  successNotificationAction,
+} from 'store/modules/notifications/actions';
 
-import { lEIsLoadingAction, lEIndexSuccessAction } from './actions';
+import {
+  lEIsLoadingAction,
+  lEIndexSuccessAction,
+  deleteLESuccessAction,
+} from './actions';
 
 function* index() {
   yield put(lEIsLoadingAction());
@@ -49,6 +56,23 @@ function* index() {
   }
 }
 
-const studentSaga = [takeLatest(LE_INDEX_LOAD, index)];
+function* deleteLE({ data }) {
+  yield put(lEIsLoadingAction());
+  try {
+    yield put(deleteLESuccessAction(data));
+    yield put(
+      successNotificationAction('Expressão Lógica excluída com sucesso!')
+    );
+  } catch (e) {
+    yield put(
+      errorNotificationAction('Ocorreu um erro ao excluir a Expressão Lógica!')
+    );
+  }
+}
+
+const studentSaga = [
+  takeLatest(LE_INDEX_LOAD, index),
+  takeLatest(LE_DELETE, deleteLE),
+];
 
 export default studentSaga;

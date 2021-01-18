@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,10 +8,17 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import ConfirmModal from 'components/ConfirmModal';
+import useModal from 'hooks/useModal';
+
+import { deleteLEAction } from 'store/modules/logicExpressions/actions';
+
 import { useStyles } from '../../styles';
 
 const LogicExpressionsTableItem = ({ le }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [deleteModalIsOpen, deleteModalClose, deleteModalOpen] = useModal();
 
   const renderVariables = () =>
     le.variables.map((v) => (
@@ -20,20 +28,36 @@ const LogicExpressionsTableItem = ({ le }) => {
       </div>
     ));
 
+  const deleteClickHandler = () => {
+    dispatch(deleteLEAction(le.id));
+    deleteModalClose();
+  };
+
   return (
-    <TableRow hover role="checkbox" tabIndex={-1}>
-      <TableCell>{le.text}</TableCell>
-      <TableCell>{renderVariables()}</TableCell>
-      <TableCell>{le.result ? 'Verdadeiro' : 'Falso'}</TableCell>
-      <TableCell>
-        <Button className={classes.editButton}>
-          <EditIcon />
-        </Button>
-        <Button className={classes.deleteButton}>
-          <DeleteIcon />
-        </Button>
-      </TableCell>
-    </TableRow>
+    <>
+      <TableRow hover role="checkbox" tabIndex={-1}>
+        <TableCell>{le.text}</TableCell>
+        <TableCell>{renderVariables()}</TableCell>
+        <TableCell>{le.result ? 'Verdadeiro' : 'Falso'}</TableCell>
+        <TableCell>
+          <Button className={classes.editButton}>
+            <EditIcon />
+          </Button>
+          <Button className={classes.deleteButton} onClick={deleteModalOpen}>
+            <DeleteIcon />
+          </Button>
+        </TableCell>
+      </TableRow>
+      <ConfirmModal
+        open={deleteModalIsOpen}
+        closeHandler={deleteModalClose}
+        confirmHandler={deleteClickHandler}
+        titleText="Deseja realmente excluir a expressão lógica?"
+        cancelText="CANCELAR"
+        confirmText="EXCLUIR"
+        variant="error"
+      />
+    </>
   );
 };
 
