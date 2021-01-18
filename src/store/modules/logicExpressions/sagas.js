@@ -1,6 +1,6 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { v4 as uuidv4 } from 'uuid';
-import { LE_INDEX_LOAD, LE_DELETE } from 'store/types';
+import { LE_INDEX_LOAD, LE_DELETE, LE_NEW } from 'store/types';
 
 import {
   errorNotificationAction,
@@ -11,6 +11,7 @@ import {
   lEIsLoadingAction,
   lEIndexSuccessAction,
   deleteLESuccessAction,
+  lENewSuccessAction,
 } from './actions';
 
 function* index() {
@@ -73,9 +74,31 @@ function* deleteLE({ data }) {
   }
 }
 
+function* newLE({ data }) {
+  yield put(lEIsLoadingAction());
+  try {
+    const savedLE = {
+      id: uuidv4(),
+      ...data,
+    };
+
+    yield put(lENewSuccessAction(savedLE));
+    yield put(
+      successNotificationAction('Expressão lógica adicionada com sucesso!')
+    );
+  } catch (e) {
+    yield put(
+      errorNotificationAction(
+        'Ocorreu um erro ao adicionar a Expressão lógica!'
+      )
+    );
+  }
+}
+
 const studentSaga = [
   takeLatest(LE_INDEX_LOAD, index),
   takeLatest(LE_DELETE, deleteLE),
+  takeLatest(LE_NEW, newLE),
 ];
 
 export default studentSaga;
