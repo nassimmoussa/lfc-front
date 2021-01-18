@@ -11,7 +11,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ConfirmModal from 'components/ConfirmModal';
 import useModal from 'hooks/useModal';
 
-import { deleteLEAction } from 'store/modules/logicExpressions/actions';
+import {
+  deleteLEAction,
+  selectLEAction,
+} from 'store/modules/logicExpressions/actions';
 
 import { useStyles } from '../../styles';
 
@@ -28,6 +31,10 @@ const LogicExpressionsTableItem = ({ le }) => {
       </div>
     ));
 
+  const editClickHandler = () => {
+    dispatch(selectLEAction(le));
+  };
+
   const deleteClickHandler = () => {
     dispatch(deleteLEAction(le.id));
     deleteModalClose();
@@ -41,7 +48,7 @@ const LogicExpressionsTableItem = ({ le }) => {
         <TableCell>{renderVariables()}</TableCell>
         <TableCell>{le.result ? 'Verdadeiro' : 'Falso'}</TableCell>
         <TableCell>
-          <Button className={classes.editButton}>
+          <Button onClick={editClickHandler} className={classes.editButton}>
             <EditIcon />
           </Button>
           <Button className={classes.deleteButton} onClick={deleteModalOpen}>

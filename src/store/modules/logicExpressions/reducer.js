@@ -29,12 +29,12 @@ export default (state = initialState, action) => {
 
     case LE_CLEAR_SELECT:
       return produce(state, (draft) => {
-        delete draft.data.selectedStudent;
+        delete draft.data.selectedLE;
       });
 
     case LE_SELECT:
       return produce(state, (draft) => {
-        draft.data.selectedStudent = action.data;
+        draft.data.selectedLE = action.data;
       });
 
     case LE_DELETE_SUCCESS:

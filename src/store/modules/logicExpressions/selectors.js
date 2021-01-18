@@ -29,5 +29,5 @@ export const lEsListSelector = createSelector(
 
 export const selectedlESelector = createSelector(
   lEsDataSelector,
-  (data) => data.selectedlE
+  (data) => data.selectedLE
 );

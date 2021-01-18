@@ -11,6 +11,7 @@ import {
 
 import LogicExpressionsList from './components/LogicExpressionsList';
 import AddLEModal from './components/AddLEModal';
+import EditLEModal from './components/EditLEModal';
 
 import { useStyles } from './styles';
 
@@ -35,6 +36,7 @@ const LogicExpressions = () => {
       </div>
       <LogicExpressionsList />
       <AddLEModal open={isOpenAddLEModal} closeHandler={closeAddLEModal} />
+      <EditLEModal />
     </div>
   );
 };
