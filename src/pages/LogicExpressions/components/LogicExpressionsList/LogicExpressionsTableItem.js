@@ -36,6 +36,7 @@ const LogicExpressionsTableItem = ({ le }) => {
   return (
     <>
       <TableRow hover role="checkbox" tabIndex={-1}>
+        <TableCell>{le.title}</TableCell>
         <TableCell>{le.text}</TableCell>
         <TableCell>{renderVariables()}</TableCell>
         <TableCell>{le.result ? 'Verdadeiro' : 'Falso'}</TableCell>
@@ -64,6 +65,7 @@ const LogicExpressionsTableItem = ({ le }) => {
 LogicExpressionsTableItem.propTypes = {
   le: PropTypes.shape({
     id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     result: PropTypes.bool.isRequired,
     variables: PropTypes.arrayOf(

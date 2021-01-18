@@ -36,13 +36,16 @@ const LogicExpressionsList = () => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
+              <TableCell style={{ minWidth: 160 }} className={classes.boldText}>
+                Titulo
+              </TableCell>
               <TableCell style={{ minWidth: 240 }} className={classes.boldText}>
                 Texto
               </TableCell>
               <TableCell style={{ minWidth: 160 }} className={classes.boldText}>
                 Variavies
               </TableCell>
-              <TableCell style={{ minWidth: 160 }} className={classes.boldText}>
+              <TableCell style={{ minWidth: 60 }} className={classes.boldText}>
                 Resultado
               </TableCell>
               <TableCell style={{ minWidth: 80 }} className={classes.boldText}>

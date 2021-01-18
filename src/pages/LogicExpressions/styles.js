@@ -66,7 +66,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   addVariableBtn: {
     display: 'flex',
-    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
     paddingBottom: theme.spacing(1),
     paddingTop: theme.spacing(1),
   },

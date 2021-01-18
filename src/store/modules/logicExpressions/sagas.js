@@ -19,6 +19,7 @@ function* index() {
     const lEs = [
       {
         id: uuidv4(),
+        title: 'expressão simples',
         text: 'x < y',
         variables: [
           { name: 'x', value: '1' },
@@ -28,6 +29,7 @@ function* index() {
       },
       {
         id: uuidv4(),
+        title: 'expressão com and verdadeira',
         text: 'x < y && x > 0',
         variables: [
           { name: 'x', value: '1' },
@@ -37,6 +39,7 @@ function* index() {
       },
       {
         id: uuidv4(),
+        title: 'expressão com and falsa',
         text: 'x < y && x < 0',
         variables: [
           { name: 'x', value: '1' },

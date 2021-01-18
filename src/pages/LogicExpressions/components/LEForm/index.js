@@ -36,6 +36,7 @@ const LEForm = ({
       initialValues={initialValues}
       onSubmit={submitHandler}
       validationSchema={Yup.object().shape({
+        title: Yup.string().min(1).required('Campo obrigatório'),
         text: Yup.string().min(1).required('Campo obrigatório'),
         result: Yup.boolean().required('Campo obrigatório'),
         variables: Yup.array()
@@ -65,6 +66,20 @@ const LEForm = ({
               <TextField
                 className={classes.inputField}
                 type="text"
+                id="title"
+                label="Titulo"
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                error={errors.title && touched.title}
+                helperText={errors.title && touched.title && errors.title}
+                value={values.title}
+                onBlur={handleBlur}
+                onChange={handleChange}
+              />
+              <TextField
+                className={classes.inputField}
+                type="text"
                 id="text"
                 label="Texto"
                 variant="outlined"
@@ -80,6 +95,10 @@ const LEForm = ({
             <Divider />
 
             <div className={classes.addVariableBtn}>
+              <Typography variant="h6" className={classes.boldText}>
+                Quantidade de Variávies: {values.variables.length}
+              </Typography>
+
               <Button
                 variant="outlined"
                 color="primary"
