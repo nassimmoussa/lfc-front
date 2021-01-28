@@ -4,6 +4,8 @@ import socketIOClient from 'socket.io-client';
 import Loading from 'components/Loading';
 import Button from '@material-ui/core/Button';
 
+import StudentsList from './components/StudentsList';
+import SelectedStudentsList from './components/SelectedStudentsList';
 import { useStyles } from './styles';
 
 const WS_ENDPOINT = process.env.REACT_APP_WS_URL;
@@ -31,15 +33,25 @@ const Home = () => {
   });
 
   return (
-    <div className={classes.createRoomContainer}>
-      <Button
-        variant="outlined"
-        size="large"
-        color="primary"
-        onClick={createRoomHandler}
-      >
-        CRIAR SALA VIRTUAL
-      </Button>
+    <div>
+      <div className={classes.container}>
+        <div className={classes.content}>
+          <StudentsList />
+        </div>
+        <div className={classes.content}>
+          <SelectedStudentsList />
+          <div className={classes.cardButtons}>
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              onClick={createRoomHandler}
+            >
+              CRIAR SALA VIRTUAL
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
