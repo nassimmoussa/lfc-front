@@ -13,6 +13,7 @@ import {
   loginUserService,
   signUpUserService,
   forgotPasswordService,
+  updateProfessorService,
 } from 'services/auth';
 import axios from 'utils/axios';
 
@@ -109,10 +110,10 @@ function* updateProfessor({ data }) {
       throw error;
     }
 
-    // const response = yield updateProfessorService({ userData: data });
+    const response = yield updateProfessorService({ professorData: data });
 
     yield put(successNotificationAction('Profile was updated successfully'));
-    yield put(authUpdateSuccessAction(data));
+    yield put(authUpdateSuccessAction(response));
     yield call(history.push, ROUTER_PATHS.HOME);
   } catch (e) {
     yield put(errorNotificationAction(e.message));

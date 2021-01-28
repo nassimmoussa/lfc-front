@@ -20,3 +20,18 @@ export const forgotPasswordService = async ({ email }) => {
   });
   return data;
 };
+
+export const updateProfessorService = async ({ professorData }) => {
+  try {
+    const { data } = await axios.put('/professores/profile', professorData);
+    return data;
+  } catch (e) {
+    if (e.response) {
+      throw e.response.data;
+    }
+    const error = {
+      message: 'Some thing went wrong, please try again later',
+    };
+    throw error;
+  }
+};
