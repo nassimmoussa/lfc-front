@@ -1,9 +1,11 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
+import isEmpty from 'lodash.isempty';
 import {
   AUTH_LOGIN_LOAD,
   AUTH_LOGOUT,
   AUTH_SIGN_UP_LOAD,
   AUTH_FORGOT_PASSWORD,
+  AUTH_UPDATE_LOAD,
 } from 'store/types';
 import ROUTER_PATHS from 'constants/router';
 import history from 'services/history';
@@ -14,14 +16,19 @@ import {
 } from 'services/auth';
 import axios from 'utils/axios';
 
-import { successNotificationAction } from 'store/modules/notifications/actions';
+import {
+  successNotificationAction,
+  errorNotificationAction,
+} from 'store/modules/notifications/actions';
 
 import {
   authIsLoadingAction,
   authLoginSuccessAction,
   authErrorAction,
   authSignUpSuccessAction,
+  authUpdateSuccessAction,
 } from './actions';
+import { deleteEmptyAttributes } from './serializers';
 
 function* login({ data }) {
   yield put(authIsLoadingAction());
@@ -91,12 +98,35 @@ function* forgotPassword({ data }) {
   yield call(history.push, ROUTER_PATHS.LOGIN);
 }
 
+function* updateProfessor({ data }) {
+  yield put(authIsLoadingAction());
+  try {
+    deleteEmptyAttributes(data);
+    if (isEmpty(data)) {
+      const error = {
+        message: 'deve atualizar pelo menos um campo',
+      };
+      throw error;
+    }
+
+    // const response = yield updateProfessorService({ userData: data });
+
+    yield put(successNotificationAction('Profile was updated successfully'));
+    yield put(authUpdateSuccessAction(data));
+    yield call(history.push, ROUTER_PATHS.HOME);
+  } catch (e) {
+    yield put(errorNotificationAction(e.message));
+    yield put(authErrorAction(e));
+  }
+}
+
 const authSagas = [
   takeLatest('persist/REHYDRATE', setAuthHeaders),
   takeLatest(AUTH_LOGIN_LOAD, login),
   takeLatest(AUTH_LOGOUT, logout),
   takeLatest(AUTH_SIGN_UP_LOAD, signUp),
   takeLatest(AUTH_FORGOT_PASSWORD, forgotPassword),
+  takeLatest(AUTH_UPDATE_LOAD, updateProfessor),
 ];
 
 export default authSagas;

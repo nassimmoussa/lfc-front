@@ -1,5 +1,4 @@
 const AUTH = '@auth';
-const USER = '@user';
 const STUDENT = '@student';
 const LE = '@logic_expression';
 
@@ -16,8 +15,8 @@ export const AUTH_SIGN_UP_LOAD = `${AUTH}/SIGN_UP_LOAD`;
 export const AUTH_SIGN_UP_SUCCESS = `${AUTH}/SIGN_UP_SUCCESS`;
 export const AUTH_FORGOT_PASSWORD = `${AUTH}/FORGOT_PASSWORD`;
 
-export const USER_UPDATE_LOAD = `${USER}/UPDATE_LOAD`;
-export const USER_UPDATE_SUCCESS = `${USER}/UPDATE_SUCCESS`;
+export const AUTH_UPDATE_LOAD = `${AUTH}/UPDATE_LOAD`;
+export const AUTH_UPDATE_SUCCESS = `${AUTH}/UPDATE_SUCCESS`;
 
 export const STUDENT_INDEX_LOAD = `${STUDENT}/INDEX_LOAD`;
 export const STUDENT_INDEX_SUCCESS = `${STUDENT}/INDEX_SUCCESS`;

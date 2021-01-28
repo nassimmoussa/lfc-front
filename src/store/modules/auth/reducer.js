@@ -5,6 +5,7 @@ import {
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGOUT,
   AUTH_SIGN_UP_SUCCESS,
+  AUTH_UPDATE_SUCCESS,
 } from 'store/types';
 
 export const initialState = {
@@ -16,6 +17,16 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_UPDATE_SUCCESS:
+      return produce(state, (draft) => {
+        draft.isLoading = false;
+        draft.hasLoaded = true;
+        draft.data = {
+          ...draft.data,
+          ...action.data,
+        };
+      });
+
     case AUTH_SIGN_UP_SUCCESS:
       return produce(state, (draft) => {
         draft.isLoading = false;

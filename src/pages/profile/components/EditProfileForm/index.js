@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   authIsLoadingSelector,
   userProfileSelector,
 } from 'store/modules/auth/selectors';
+import { authUpdateLoadAction } from 'store/modules/auth/actions';
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -19,9 +20,10 @@ const EditProfileForm = () => {
   const classes = useStyles();
   const isLoading = useSelector(authIsLoadingSelector);
   const userProfile = useSelector(userProfileSelector);
+  const dispatch = useDispatch();
 
   const submitHandler = (values) => {
-    console.log(values);
+    dispatch(authUpdateLoadAction(values));
   };
 
   return (
@@ -34,13 +36,9 @@ const EditProfileForm = () => {
       }}
       onSubmit={submitHandler}
       validationSchema={Yup.object().shape({
-        name: Yup.string().required('Campo obrigatório'),
-        email: Yup.string()
-          .email('email inválido')
-          .required('Campo obrigatório'),
-        password: Yup.string()
-          .min(6, 'senha deve ser mais que 6 caracteres')
-          .required('Campo obrigatório'),
+        name: Yup.string(),
+        email: Yup.string().email('email inválido'),
+        password: Yup.string().min(6, 'senha deve ser mais que 6 caracteres'),
         'password-confirmation': Yup.string().oneOf(
           [Yup.ref('password'), null],
           'as senhas devem ser iguais'
@@ -61,7 +59,6 @@ const EditProfileForm = () => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="name"
               label="Nome"
@@ -77,7 +74,6 @@ const EditProfileForm = () => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="email"
               label="E-mail"
@@ -92,7 +88,6 @@ const EditProfileForm = () => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               name="password"
               label="Senha"
@@ -110,7 +105,6 @@ const EditProfileForm = () => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               name="password-confirmation"
               label="Confirma a senha"

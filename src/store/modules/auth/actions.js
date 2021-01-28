@@ -7,6 +7,8 @@ import {
   AUTH_SIGN_UP_LOAD,
   AUTH_SIGN_UP_SUCCESS,
   AUTH_FORGOT_PASSWORD,
+  AUTH_UPDATE_LOAD,
+  AUTH_UPDATE_SUCCESS,
 } from 'store/types';
 
 export const authIsLoadingAction = () => ({
@@ -44,5 +46,15 @@ export const authSignUpSuccessAction = (data) => ({
 
 export const forgotPasswordAction = (data) => ({
   type: AUTH_FORGOT_PASSWORD,
+  data,
+});
+
+export const authUpdateLoadAction = (professorInfo) => ({
+  type: AUTH_UPDATE_LOAD,
+  data: professorInfo,
+});
+
+export const authUpdateSuccessAction = (data) => ({
+  type: AUTH_UPDATE_SUCCESS,
   data,
 });
