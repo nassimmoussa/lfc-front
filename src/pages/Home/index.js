@@ -23,10 +23,10 @@ const Home = () => {
   }
 
   const createRoomHandler = () => {
-    socket.emit('createRoom', { students: ['aluno1', 'aluno2'] });
+    socket.emit('room:create', { students: ['aluno1', 'aluno2'] });
   };
 
-  socket.on('roomCreated', ({ roomId }) => {
+  socket.on('room:created', ({ roomId }) => {
     console.log(roomId);
   });
 
