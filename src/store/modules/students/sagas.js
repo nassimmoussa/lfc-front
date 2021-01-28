@@ -1,5 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { v4 as uuidv4 } from 'uuid';
+import { getStudents } from 'services/students';
+
 import {
   STUDENT_INDEX_LOAD,
   STUDENT_NEW,
@@ -23,11 +25,7 @@ import {
 function* index() {
   yield put(studentIsLoadingAction());
   try {
-    const students = [
-      { id: uuidv4(), name: 'Primeiro Aluno', cpf: '11111111111' },
-      { id: uuidv4(), name: 'Segundo Aluno', cpf: '22222222222' },
-      { id: uuidv4(), name: 'Terceiro Aluno', cpf: '33333333333' },
-    ];
+    const students = yield getStudents();
 
     yield put(studentIndexSuccessAction(students));
   } catch (e) {
