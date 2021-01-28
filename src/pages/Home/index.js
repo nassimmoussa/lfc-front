@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import socketIOClient from 'socket.io-client';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import Loading from 'components/Loading';
 import Button from '@material-ui/core/Button';
+
+import useSocket from 'hooks/useSocket';
+
+import { successNotificationAction } from 'store/modules/notifications/actions';
 
 import StudentsList from './components/StudentsList';
 import SelectedStudentsList from './components/SelectedStudentsList';
 import { useStyles } from './styles';
 
-const WS_ENDPOINT = process.env.REACT_APP_WS_URL;
-
 const Home = () => {
   const classes = useStyles();
-  const [socket, setSocket] = useState(null);
-
-  useEffect(() => {
-    const newSocket = socketIOClient(WS_ENDPOINT);
-
-    setSocket(newSocket);
-  }, []);
+  const socket = useSocket();
+  const dispatch = useDispatch();
 
   if (!socket) {
     return <Loading />;
@@ -29,7 +26,9 @@ const Home = () => {
   };
 
   socket.on('room:created', ({ roomId }) => {
-    console.log(roomId);
+    dispatch(
+      successNotificationAction(`sala criada com sucesso id: ${roomId}`)
+    );
   });
 
   return (
