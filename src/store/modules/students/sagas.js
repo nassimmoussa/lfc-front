@@ -1,6 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { v4 as uuidv4 } from 'uuid';
-import { getStudents } from 'services/students';
+import { getStudents, postStudents } from 'services/students';
 
 import {
   STUDENT_INDEX_LOAD,
@@ -36,10 +35,7 @@ function* index() {
 function* newStudent({ data }) {
   yield put(studentIsLoadingAction());
   try {
-    const savedStudent = {
-      id: uuidv4(),
-      ...data,
-    };
+    const savedStudent = yield postStudents(data);
 
     yield put(studentNewSuccessAction(savedStudent));
     yield put(successNotificationAction('Aluno adicionado com sucesso!'));
