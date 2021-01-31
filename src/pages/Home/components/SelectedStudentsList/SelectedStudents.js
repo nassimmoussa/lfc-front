@@ -12,7 +12,7 @@ const SelectedStudents = () => {
   const selectedStudents = students.slice(0, 2);
 
   return selectedStudents.map((student, index) => (
-    <div className={classes.cardStudentLine}>
+    <div className={classes.cardStudentLine} key={student.id}>
       <Typography variant="subtitle1" className={classes.cardLineIndex}>
         {index + 1}ª
       </Typography>

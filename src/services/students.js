@@ -29,3 +29,21 @@ export const postStudents = async (studentData) => {
     throw error;
   }
 };
+
+export const putStudent = async (studentData) => {
+  try {
+    const { data } = await axios.put(`/students/${studentData.id}`, {
+      cpf: studentData.cpf,
+      name: studentData.name,
+    });
+    return data;
+  } catch (e) {
+    if (e.response) {
+      throw e.response.data;
+    }
+    const error = {
+      message: 'Some thing went wrong, please try again later',
+    };
+    throw error;
+  }
+};

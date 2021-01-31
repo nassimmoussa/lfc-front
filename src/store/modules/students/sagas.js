@@ -1,5 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { getStudents, postStudents } from 'services/students';
+import { getStudents, postStudents, putStudent } from 'services/students';
 
 import {
   STUDENT_INDEX_LOAD,
@@ -57,7 +57,9 @@ function* deleteStudent({ data }) {
 function* editStudent({ data }) {
   yield put(studentIsLoadingAction());
   try {
-    yield put(editStudentSuccessAction(data));
+    const updatedStudent = yield putStudent(data);
+
+    yield put(editStudentSuccessAction(updatedStudent));
     yield put(successNotificationAction('Aluno atualizado com sucesso!'));
   } catch (e) {
     yield put(errorNotificationAction('Ocorreu um erro ao atualizar o aluno!'));
