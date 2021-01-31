@@ -1,5 +1,6 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { v4 as uuidv4 } from 'uuid';
+import { indexLEs } from 'services/logicExpressions';
 import { LE_INDEX_LOAD, LE_DELETE, LE_NEW, LE_EDIT } from 'store/types';
 
 import {
@@ -18,38 +19,7 @@ import {
 function* index() {
   yield put(lEIsLoadingAction());
   try {
-    const lEs = [
-      {
-        id: uuidv4(),
-        title: 'expressão simples',
-        text: 'x < y',
-        variables: [
-          { name: 'x', value: '1' },
-          { name: 'y', value: '2' },
-        ],
-        result: true,
-      },
-      {
-        id: uuidv4(),
-        title: 'expressão com and verdadeira',
-        text: 'x < y && x > 0',
-        variables: [
-          { name: 'x', value: '1' },
-          { name: 'y', value: '2' },
-        ],
-        result: true,
-      },
-      {
-        id: uuidv4(),
-        title: 'expressão com and falsa',
-        text: 'x < y && x < 0',
-        variables: [
-          { name: 'x', value: '1' },
-          { name: 'y', value: '2' },
-        ],
-        result: false,
-      },
-    ];
+    const lEs = yield indexLEs();
 
     yield put(lEIndexSuccessAction(lEs));
   } catch (e) {
