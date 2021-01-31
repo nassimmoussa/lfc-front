@@ -1,5 +1,10 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { getStudents, postStudents, putStudent } from 'services/students';
+import {
+  getStudents,
+  postStudent,
+  putStudent,
+  deleteStudentService,
+} from 'services/students';
 
 import {
   STUDENT_INDEX_LOAD,
@@ -35,7 +40,7 @@ function* index() {
 function* newStudent({ data }) {
   yield put(studentIsLoadingAction());
   try {
-    const savedStudent = yield postStudents(data);
+    const savedStudent = yield postStudent(data);
 
     yield put(studentNewSuccessAction(savedStudent));
     yield put(successNotificationAction('Aluno adicionado com sucesso!'));
@@ -47,7 +52,8 @@ function* newStudent({ data }) {
 function* deleteStudent({ data }) {
   yield put(studentIsLoadingAction());
   try {
-    yield put(deleteStudentSuccessAction(data));
+    const response = yield deleteStudentService(data);
+    yield put(deleteStudentSuccessAction(response.studentId));
     yield put(successNotificationAction('Aluno excluído com sucesso!'));
   } catch (e) {
     yield put(errorNotificationAction('Ocorreu um erro ao excluir o aluno!'));

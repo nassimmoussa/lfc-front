@@ -15,7 +15,7 @@ export const getStudents = async () => {
   }
 };
 
-export const postStudents = async (studentData) => {
+export const postStudent = async (studentData) => {
   try {
     const { data } = await axios.post('/students/', studentData);
     return data;
@@ -36,6 +36,21 @@ export const putStudent = async (studentData) => {
       cpf: studentData.cpf,
       name: studentData.name,
     });
+    return data;
+  } catch (e) {
+    if (e.response) {
+      throw e.response.data;
+    }
+    const error = {
+      message: 'Some thing went wrong, please try again later',
+    };
+    throw error;
+  }
+};
+
+export const deleteStudentService = async (studentId) => {
+  try {
+    const { data } = await axios.delete(`/students/${studentId}`);
     return data;
   } catch (e) {
     if (e.response) {
