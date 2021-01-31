@@ -29,3 +29,18 @@ export const postLE = async (lEData) => {
     throw error;
   }
 };
+
+export const putLE = async (lEData) => {
+  try {
+    const { data } = await axios.put(`/logic_expressions/${lEData.id}`, lEData);
+    return data;
+  } catch (e) {
+    if (e.response) {
+      throw e.response.data;
+    }
+    const error = {
+      message: 'Some thing went wrong, please try again later',
+    };
+    throw error;
+  }
+};

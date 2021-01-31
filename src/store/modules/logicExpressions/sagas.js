@@ -1,5 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { indexLEs, postLE } from 'services/logicExpressions';
+import { indexLEs, postLE, putLE } from 'services/logicExpressions';
 import { LE_INDEX_LOAD, LE_DELETE, LE_NEW, LE_EDIT } from 'store/types';
 
 import {
@@ -65,7 +65,9 @@ function* newLE({ data }) {
 function* editLE({ data }) {
   yield put(lEIsLoadingAction());
   try {
-    yield put(editLESuccessAction(data));
+    const updatedLE = yield putLE(data);
+
+    yield put(editLESuccessAction(updatedLE));
     yield put(
       successNotificationAction('Expressão lógica atualizada com sucesso!')
     );
