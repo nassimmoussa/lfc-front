@@ -39,14 +39,12 @@ const LEForm = ({
         title: Yup.string().min(1).required('Campo obrigatório'),
         text: Yup.string().min(1).required('Campo obrigatório'),
         result: Yup.boolean().required('Campo obrigatório'),
-        variables: Yup.array()
-          .of(
-            Yup.object().shape({
-              name: Yup.string().required('Nome de variavel é obrigatório'),
-              value: Yup.string().required('Valor de variavel é obrigatório'),
-            })
-          )
-          .required(),
+        variables: Yup.array().of(
+          Yup.object().shape({
+            name: Yup.string().required('Nome de variavel é obrigatório'),
+            value: Yup.string().required('Valor de variavel é obrigatório'),
+          })
+        ),
       })}
     >
       {(props) => {

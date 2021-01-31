@@ -1,6 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { v4 as uuidv4 } from 'uuid';
-import { indexLEs } from 'services/logicExpressions';
+import { indexLEs, postLE } from 'services/logicExpressions';
 import { LE_INDEX_LOAD, LE_DELETE, LE_NEW, LE_EDIT } from 'store/types';
 
 import {
@@ -48,10 +47,7 @@ function* deleteLE({ data }) {
 function* newLE({ data }) {
   yield put(lEIsLoadingAction());
   try {
-    const savedLE = {
-      id: uuidv4(),
-      ...data,
-    };
+    const savedLE = yield postLE(data);
 
     yield put(lENewSuccessAction(savedLE));
     yield put(

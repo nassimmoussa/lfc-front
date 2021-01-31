@@ -14,3 +14,18 @@ export const indexLEs = async () => {
     throw error;
   }
 };
+
+export const postLE = async (lEData) => {
+  try {
+    const { data } = await axios.post('/logic_expressions/', lEData);
+    return data;
+  } catch (e) {
+    if (e.response) {
+      throw e.response.data;
+    }
+    const error = {
+      message: 'Some thing went wrong, please try again later',
+    };
+    throw error;
+  }
+};
