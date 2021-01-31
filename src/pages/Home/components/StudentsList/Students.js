@@ -4,13 +4,19 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import { studentsListSelector } from 'store/modules/students/selectors';
+import {
+  studentsListSelector,
+  hasFilteredStudentsSelector,
+  filteredStudentsSelector,
+} from 'store/modules/students/selectors';
 
 import { useStyles } from '../../styles';
 
 const Students = () => {
   const classes = useStyles();
   const students = useSelector(studentsListSelector);
+  const hasFilteredStudents = useSelector(hasFilteredStudentsSelector);
+  const filteredStudents = useSelector(filteredStudentsSelector) || [];
   const selectedStudents = students.slice(0, 2);
 
   const checkIfSelected = (id) =>
@@ -34,7 +40,9 @@ const Students = () => {
     );
   };
 
-  return students.map(renderStudent);
+  return hasFilteredStudents
+    ? filteredStudents.map(renderStudent)
+    : students.map(renderStudent);
 };
 
 export default Students;

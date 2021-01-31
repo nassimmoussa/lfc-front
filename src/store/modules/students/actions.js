@@ -12,6 +12,8 @@ import {
   STUDENT_CLEAR_SELECT,
   STUDENT_EDIT,
   STUDENT_EDIT_SUCCESS,
+  STUDENT_SEARCH_FILTER,
+  STUDENT_REMOVE_SEARCH_FILTER,
 } from '../../types';
 
 export const studentIsLoadingAction = () => ({
@@ -75,3 +77,15 @@ export const editStudentSuccessAction = (student) => ({
   type: STUDENT_EDIT_SUCCESS,
   data: student,
 });
+
+export const studentSearchAction = (searchText) => {
+  if (searchText) {
+    return {
+      type: STUDENT_SEARCH_FILTER,
+      data: searchText,
+    };
+  }
+  return {
+    type: STUDENT_REMOVE_SEARCH_FILTER,
+  };
+};

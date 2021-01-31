@@ -9,6 +9,8 @@ import {
   STUDENT_SELECT,
   STUDENT_CLEAR_SELECT,
   STUDENT_EDIT_SUCCESS,
+  STUDENT_SEARCH_FILTER,
+  STUDENT_REMOVE_SEARCH_FILTER,
 } from 'store/types';
 
 export const initialState = {
@@ -20,6 +22,19 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case STUDENT_SEARCH_FILTER:
+      return produce(state, (draft) => {
+        draft.data.filteredStudents = draft.data.studentsList.filter(
+          (student) =>
+            student.name.toLowerCase().includes(action.data.toLowerCase())
+        );
+      });
+
+    case STUDENT_REMOVE_SEARCH_FILTER:
+      return produce(state, (draft) => {
+        draft.data.filteredStudents = [];
+      });
+
     case STUDENT_EDIT_SUCCESS:
       return produce(state, (draft) => {
         draft.data.studentsList = draft.data.studentsList.map((student) =>

@@ -5,7 +5,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
-import { studentIndexLoadAction } from 'store/modules/students/actions';
+import {
+  studentIndexLoadAction,
+  studentSearchAction,
+} from 'store/modules/students/actions';
 
 import { useStyles } from '../../styles';
 import Students from './Students';
@@ -20,9 +23,9 @@ const StudentsList = () => {
     dispatch(studentIndexLoadAction());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(trapsSearchAction(search));
-  // }, [dispatch, search]);
+  useEffect(() => {
+    dispatch(studentSearchAction(search));
+  }, [dispatch, search]);
 
   return (
     <Paper elevation={3} className={classes.studentsPaper}>

@@ -37,3 +37,13 @@ export const selectedStudentSelector = createSelector(
   studentsDataSelector,
   (data) => data.selectedStudent
 );
+
+export const filteredStudentsSelector = createSelector(
+  studentsDataSelector,
+  (data) => data.filteredStudents
+);
+
+export const hasFilteredStudentsSelector = createSelector(
+  filteredStudentsSelector,
+  (Students) => !isEmpty(Students)
+);
