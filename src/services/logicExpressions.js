@@ -44,3 +44,18 @@ export const putLE = async (lEData) => {
     throw error;
   }
 };
+
+export const deleteLEService = async (lEId) => {
+  try {
+    const { data } = await axios.delete(`/logic_expressions/${lEId}`);
+    return data;
+  } catch (e) {
+    if (e.response) {
+      throw e.response.data;
+    }
+    const error = {
+      message: 'Some thing went wrong, please try again later',
+    };
+    throw error;
+  }
+};

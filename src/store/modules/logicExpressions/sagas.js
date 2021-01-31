@@ -1,5 +1,10 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { indexLEs, postLE, putLE } from 'services/logicExpressions';
+import {
+  indexLEs,
+  postLE,
+  putLE,
+  deleteLEService,
+} from 'services/logicExpressions';
 import { LE_INDEX_LOAD, LE_DELETE, LE_NEW, LE_EDIT } from 'store/types';
 
 import {
@@ -33,7 +38,9 @@ function* index() {
 function* deleteLE({ data }) {
   yield put(lEIsLoadingAction());
   try {
-    yield put(deleteLESuccessAction(data));
+    const response = yield deleteLEService(data);
+
+    yield put(deleteLESuccessAction(response.lEId));
     yield put(
       successNotificationAction('Expressão Lógica excluída com sucesso!')
     );
