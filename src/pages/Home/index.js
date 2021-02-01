@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Loading from 'components/Loading';
 import Button from '@material-ui/core/Button';
@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import useSocket from 'hooks/useSocket';
 
 import { successNotificationAction } from 'store/modules/notifications/actions';
+import { studentCleanUpAction } from 'store/modules/students/actions';
+import { roomStudentsSelector } from 'store/modules/students/selectors';
 
 import StudentsList from './components/StudentsList';
 import SelectedStudentsList from './components/SelectedStudentsList';
@@ -16,13 +18,20 @@ const Home = () => {
   const classes = useStyles();
   const socket = useSocket();
   const dispatch = useDispatch();
+  const students = useSelector(roomStudentsSelector);
+
+  useEffect(() => {
+    return () => {
+      dispatch(studentCleanUpAction());
+    };
+  }, [dispatch]);
 
   if (!socket) {
     return <Loading />;
   }
 
   const createRoomHandler = () => {
-    socket.emit('room:create', { students: ['aluno1', 'aluno2'] });
+    socket.emit('room:create', { students });
   };
 
   socket.on('room:created', ({ roomId }) => {

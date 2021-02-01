@@ -2,14 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
-import { studentsListSelector } from 'store/modules/students/selectors';
+import { roomStudentsSelector } from 'store/modules/students/selectors';
 
 import { useStyles } from '../../styles';
 
 const SelectedStudents = () => {
   const classes = useStyles();
-  const students = useSelector(studentsListSelector);
-  const selectedStudents = students.slice(0, 2);
+  const selectedStudents = useSelector(roomStudentsSelector);
 
   return selectedStudents.map((student, index) => (
     <div className={classes.cardStudentLine} key={student.id}>

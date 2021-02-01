@@ -47,3 +47,8 @@ export const hasFilteredStudentsSelector = createSelector(
   filteredStudentsSelector,
   (Students) => !isEmpty(Students)
 );
+
+export const roomStudentsSelector = createSelector(
+  studentsDataSelector,
+  (data) => data.roomStudents || []
+);

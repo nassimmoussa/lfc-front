@@ -14,6 +14,8 @@ import {
   STUDENT_EDIT_SUCCESS,
   STUDENT_SEARCH_FILTER,
   STUDENT_REMOVE_SEARCH_FILTER,
+  STUDENT_ADD_TO_ROOM,
+  STUDENT_REMOVE_FROM_ROOM,
 } from '../../types';
 
 export const studentIsLoadingAction = () => ({
@@ -89,3 +91,13 @@ export const studentSearchAction = (searchText) => {
     type: STUDENT_REMOVE_SEARCH_FILTER,
   };
 };
+
+export const addStudentToRoom = (student) => ({
+  type: STUDENT_ADD_TO_ROOM,
+  data: student,
+});
+
+export const removeStudentFromRoom = (student) => ({
+  type: STUDENT_REMOVE_FROM_ROOM,
+  data: student,
+});

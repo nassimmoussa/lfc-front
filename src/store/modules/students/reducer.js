@@ -11,17 +11,33 @@ import {
   STUDENT_EDIT_SUCCESS,
   STUDENT_SEARCH_FILTER,
   STUDENT_REMOVE_SEARCH_FILTER,
+  STUDENT_ADD_TO_ROOM,
+  STUDENT_REMOVE_FROM_ROOM,
 } from 'store/types';
 
 export const initialState = {
   isLoading: false,
   hasLoaded: false,
   error: {},
-  data: {},
+  data: {
+    roomStudents: [],
+  },
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case STUDENT_REMOVE_FROM_ROOM:
+      return produce(state, (draft) => {
+        draft.data.roomStudents = draft.data.roomStudents.filter(
+          (student) => student.id !== action.data.id
+        );
+      });
+
+    case STUDENT_ADD_TO_ROOM:
+      return produce(state, (draft) => {
+        draft.data.roomStudents.push(action.data);
+      });
+
     case STUDENT_SEARCH_FILTER:
       return produce(state, (draft) => {
         draft.data.filteredStudents = draft.data.studentsList.filter(
