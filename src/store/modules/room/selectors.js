@@ -7,6 +7,11 @@ export const roomDataSelector = createSelector(
   (room) => room.data
 );
 
+export const loggedStudentSelector = createSelector(
+  roomSelector,
+  (room) => room.loggedStudent
+);
+
 export const studentsSelector = createSelector(
   roomDataSelector,
   (data) => data.students

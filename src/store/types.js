@@ -56,3 +56,4 @@ export const LE_CLEAR_SELECT = `${LE}/CLEAR_SELECT`;
 
 export const ROOM_CLEANUP = `${ROOM}/CLEANUP`;
 export const ROOM_UPDATE = `${ROOM}/UPDATE`;
+export const ROOM_STUDENT_LOGIN_SUCCESS = `${ROOM}/STUDENT_LOGIN_SUCCESS`;

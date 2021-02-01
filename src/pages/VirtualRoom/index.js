@@ -22,7 +22,7 @@ const VirtualRoom = () => {
     if (socket && loggedIn) {
       socket.emit('room:join', { roomId });
     }
-  }, [socket, loggedIn]);
+  }, [socket, loggedIn, roomId]);
 
   useEffect(() => {
     return () => {
@@ -38,7 +38,7 @@ const VirtualRoom = () => {
     dispatch(roomUpdate(room));
   });
 
-  return loggedIn ? <ProfessorRoom /> : <StudentRoom />;
+  return loggedIn ? <ProfessorRoom /> : <StudentRoom socket={socket} />;
 };
 
 export default VirtualRoom;
