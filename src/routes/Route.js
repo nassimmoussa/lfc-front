@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import DefaultLayout from 'pages/layouts/DefaultLayout';
 import LoggedOff from 'pages/layouts/LoggedOff';
+import RoomLayout from 'pages/layouts/RoomLayout';
 import { store } from '../store';
 
 const RouteWrapper = ({ component: Component, isRoom, isPrivate, ...rest }) => {
@@ -15,7 +16,15 @@ const RouteWrapper = ({ component: Component, isRoom, isPrivate, ...rest }) => {
   if (signed && !isPrivate && !isRoom) {
     return <Redirect to="/" />;
   }
-  const Layout = signed ? DefaultLayout : LoggedOff;
+  let Layout;
+
+  if (signed) {
+    Layout = DefaultLayout;
+  } else if (isRoom) {
+    Layout = RoomLayout;
+  } else {
+    Layout = LoggedOff;
+  }
 
   return (
     <Layout>

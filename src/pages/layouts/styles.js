@@ -37,5 +37,11 @@ export const useStyles = makeStyles((theme) => {
         flexBasis: '100%',
       },
     },
+    topBar: {
+      height: 70,
+    },
+    title: {
+      flexGrow: 1,
+    },
   };
 });

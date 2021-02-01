@@ -9,6 +9,9 @@ import useSocket from 'hooks/useSocket';
 import { isSignedSelector } from 'store/modules/auth/selectors';
 import { roomCleanup, roomUpdate } from 'store/modules/room/actions';
 
+import ProfessorRoom from './ProfessorRoom';
+import StudentRoom from './StudentRoom';
+
 const VirtualRoom = () => {
   const { roomId } = useParams();
   const socket = useSocket();
@@ -35,11 +38,7 @@ const VirtualRoom = () => {
     dispatch(roomUpdate(room));
   });
 
-  return (
-    <div>
-      <h2>VirtualRoom {roomId}</h2>
-    </div>
-  );
+  return loggedIn ? <ProfessorRoom /> : <StudentRoom />;
 };
 
 export default VirtualRoom;
