@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import ROUTER_PATH from 'constants/router';
 
 import Loading from 'components/Loading';
 import Button from '@material-ui/core/Button';
@@ -16,6 +19,7 @@ import { useStyles } from './styles';
 
 const Home = () => {
   const classes = useStyles();
+  const history = useHistory();
   const socket = useSocket();
   const dispatch = useDispatch();
   const students = useSelector(roomStudentsSelector);
@@ -38,6 +42,7 @@ const Home = () => {
     dispatch(
       successNotificationAction(`sala criada com sucesso id: ${roomId}`)
     );
+    history.push(`${ROUTER_PATH.VIRTUAL_ROOM}/${roomId}`);
   });
 
   return (

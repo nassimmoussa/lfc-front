@@ -6,6 +6,7 @@ const ROUTER_PATHS = {
   PROFILE: '/profile',
   STUDENTS: '/students',
   LOGIC_EXPRESSIONS: '/logic_expressions',
+  VIRTUAL_ROOM: '/virtual_room',
 };
 
 export default ROUTER_PATHS;

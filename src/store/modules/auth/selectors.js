@@ -32,3 +32,8 @@ export const userProfileSelector = createSelector(authDataSelector, (data) => ({
   name: data.name,
   email: data.email,
 }));
+
+export const isSignedSelector = createSelector(
+  authDataSelector,
+  (data) => !!data.token
+);

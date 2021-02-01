@@ -5,14 +5,14 @@ import DefaultLayout from 'pages/layouts/DefaultLayout';
 import LoggedOff from 'pages/layouts/LoggedOff';
 import { store } from '../store';
 
-const RouteWrapper = ({ component: Component, isPrivate, ...rest }) => {
+const RouteWrapper = ({ component: Component, isRoom, isPrivate, ...rest }) => {
   const signed = !!store.getState().auth.data.token;
 
   if (!signed && isPrivate) {
     return <Redirect to="/login" />;
   }
 
-  if (signed && !isPrivate) {
+  if (signed && !isPrivate && !isRoom) {
     return <Redirect to="/" />;
   }
   const Layout = signed ? DefaultLayout : LoggedOff;
@@ -26,12 +26,14 @@ const RouteWrapper = ({ component: Component, isPrivate, ...rest }) => {
 
 RouteWrapper.propTypes = {
   isPrivate: PropTypes.bool,
+  isRoom: PropTypes.bool,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
 };
 
 RouteWrapper.defaultProps = {
   isPrivate: false,
+  isRoom: false,
 };
 
 export default RouteWrapper;
