@@ -38,7 +38,11 @@ const VirtualRoom = () => {
     dispatch(roomUpdate(room));
   });
 
-  return loggedIn ? <ProfessorRoom /> : <StudentRoom socket={socket} />;
+  return loggedIn ? (
+    <ProfessorRoom socket={socket} />
+  ) : (
+    <StudentRoom socket={socket} />
+  );
 };
 
 export default VirtualRoom;

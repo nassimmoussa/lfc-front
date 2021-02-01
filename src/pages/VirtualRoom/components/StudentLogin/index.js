@@ -21,8 +21,8 @@ const StudentLoginModal = ({ socket }) => {
   const [error, setError] = useState(false);
   const validator = Yup.string().min(11).max(11).required();
 
-  socket.on('room:login:success', ({ room }) => {
-    dispatch(studentLoginSuccess(room));
+  socket.on('room:login:success', ({ room, cpf }) => {
+    dispatch(studentLoginSuccess(room, cpf));
   });
 
   const validate = () => {
