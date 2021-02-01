@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Loading from 'components/Loading';
 
 import useSocket from 'hooks/useSocket';
 
 import { isSignedSelector } from 'store/modules/auth/selectors';
+import { roomCleanup, roomUpdate } from 'store/modules/room/actions';
 
 const VirtualRoom = () => {
   const { roomId } = useParams();
   const socket = useSocket();
+  const dispatch = useDispatch();
   const loggedIn = useSelector(isSignedSelector);
 
   useEffect(() => {
@@ -19,12 +21,18 @@ const VirtualRoom = () => {
     }
   }, [socket, loggedIn]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(roomCleanup());
+    };
+  }, [dispatch]);
+
   if (!socket) {
     return <Loading />;
   }
 
   socket.on('room:joined', ({ room }) => {
-    console.log(room);
+    dispatch(roomUpdate(room));
   });
 
   return (

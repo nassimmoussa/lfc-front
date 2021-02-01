@@ -13,11 +13,14 @@ import lEs, {
   initialState as lEsInitialState,
 } from './modules/logicExpressions/reducer';
 
+import room, { initialState as roomInitialState } from './modules/room/reducer';
+
 export const initialState = {
   auth: authInitialState,
   notifications: notificationsInitialState,
   students: studentsInitialState,
   lEs: lEsInitialState,
+  room: roomInitialState,
 };
 
 export default combineReducers({
@@ -25,4 +28,5 @@ export default combineReducers({
   notifications,
   students,
   lEs,
+  room,
 });

@@ -1,6 +1,7 @@
 const AUTH = '@auth';
 const STUDENT = '@student';
 const LE = '@logic_expression';
+const ROOM = '@room';
 
 export const NOTIFICATIONS_ERROR = 'NOTIFICATIONS_ERROR';
 export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
@@ -52,3 +53,6 @@ export const LE_EDIT = `${LE}/EDIT`;
 export const LE_EDIT_SUCCESS = `${LE}/EDIT_SUCCESS`;
 export const LE_SELECT = `${LE}/SELECT`;
 export const LE_CLEAR_SELECT = `${LE}/CLEAR_SELECT`;
+
+export const ROOM_CLEANUP = `${ROOM}/CLEANUP`;
+export const ROOM_UPDATE = `${ROOM}/UPDATE`;
