@@ -25,6 +25,7 @@ const VirtualRoom = () => {
   }, [socket, loggedIn, roomId]);
 
   useEffect(() => {
+    dispatch(roomCleanup());
     return () => {
       dispatch(roomCleanup());
     };

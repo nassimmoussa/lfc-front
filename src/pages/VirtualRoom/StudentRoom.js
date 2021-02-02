@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
+import { newLogin } from 'store/modules/room/actions';
 import { loggedStudentSelector } from 'store/modules/room/selectors';
 
 import StudentList from './components/StudentList';
@@ -15,10 +16,15 @@ import { useStyles } from './styles';
 const StudentRoom = ({ socket }) => {
   const classes = useStyles();
   const loggedStudent = useSelector(loggedStudentSelector);
+  const dispatch = useDispatch();
 
   if (!loggedStudent) {
     return <StudentLogin socket={socket} />;
   }
+
+  socket.on('room:new:login', ({ cpf }) => {
+    dispatch(newLogin(cpf));
+  });
 
   return (
     <div className={classes.root}>

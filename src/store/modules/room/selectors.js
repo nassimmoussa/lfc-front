@@ -14,5 +14,5 @@ export const loggedStudentSelector = createSelector(
 
 export const studentsSelector = createSelector(
   roomDataSelector,
-  (data) => data.students
+  (data) => data.students || []
 );
