@@ -17,4 +17,24 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
+  root: {
+    flexGrow: 1,
+    padding: theme.spacing(2),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+  },
+  cardStudentLine: {
+    marginBottom: theme.spacing(2),
+    display: 'flex',
+    justifyContent: 'space-between',
+    borderBottom: `1px solid #BCBCBC`,
+  },
+  online: {
+    color: theme.palette.primary.light,
+  },
+  offline: {
+    color: theme.palette.error.main,
+  },
 }));
