@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { studentLoginSuccess } from 'store/modules/room/actions';
+import { errorNotificationAction } from 'store/modules/notifications/actions';
 
 import { format } from 'helpers/formatter';
 import { useStyles } from '../../styles';
@@ -20,6 +21,14 @@ const StudentLoginModal = ({ socket }) => {
   const [CPF, setCPF] = useState('');
   const [error, setError] = useState(false);
   const validator = Yup.string().min(11).max(11).required();
+
+  socket.on('room:login:fail', () => {
+    dispatch(
+      errorNotificationAction(
+        'Erro ao efetuar o login, CPF não permetido na sala'
+      )
+    );
+  });
 
   socket.on('room:login:success', ({ room, cpf }) => {
     dispatch(studentLoginSuccess(room, cpf));
