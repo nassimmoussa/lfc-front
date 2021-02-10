@@ -37,4 +37,44 @@ export const useStyles = makeStyles((theme) => ({
   offline: {
     color: theme.palette.error.main,
   },
+  addAtcivityForm: {
+    height: 600,
+  },
+  navRight: {
+    display: 'flex',
+    paddingRight: theme.spacing(3),
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+      width: '100%',
+      paddingRight: theme.spacing(0),
+    },
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+  addButton: {
+    fontWeight: theme.typography.fontWeightBold,
+    color: theme.palette.primary.main,
+    width: '180px',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+  },
+  cardButtons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(2),
+  },
+  cardButton: {
+    [theme.breakpoints.up('md')]: {
+      minWidth: '180px',
+    },
+  },
+  lESelect: {
+    marginTop: theme.spacing(1),
+  },
+  typeSelect: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
 }));
