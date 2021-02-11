@@ -80,6 +80,47 @@ export const useStyles = makeStyles((theme) => ({
 
   previewDiv: {
     height: 400,
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: '#ccc',
+  },
+  activityContainer: {
+    margin: theme.spacing(2),
+    padding: theme.spacing(2),
+    display: 'flex',
+  },
+
+  activityCard: {
+    padding: theme.spacing(2),
+  },
+  activityLeftCard: {
+    flex: '1 1 65%',
+    marginRight: '1rem',
+  },
+  activityRightCard: {
+    flex: '1 1 35%',
+  },
+
+  activityExpression: {
+    margin: theme.spacing(2, 2),
+    padding: theme.spacing(1, 2),
+    borderRadius: '0.8em 0.3em',
+    background: 'transparent',
+    backgroundImage: `linear-gradient(
+      to right,
+      rgba(255, 225, 0, 0.1),
+      rgba(255, 225, 0, 0.7) 4%,
+      rgba(255, 225, 0, 0.3)
+    )`,
+  },
+  activityBtnsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  activityBtn: {
+    width: '45%',
+  },
+  activityVariables: {
+    fontSize: '22px',
+    display: 'block',
+    marginBottom: '.25rem',
   },
 }));

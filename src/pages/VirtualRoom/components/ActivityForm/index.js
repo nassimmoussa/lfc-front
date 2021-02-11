@@ -18,8 +18,8 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
   const logicExpressions = useSelector(lEsListSelector);
   const [selectedLE, setSelectedLE] = useState('');
   const [activityForm, setActivityForm] = useState({
-    activityType: 'none',
-    logicExpression: {},
+    activityType: ACTIVITY_TYPES.LOGICAL_EXPRESSION,
+    logicExpression: logicExpressions[0],
   });
 
   const options = logicExpressions.map((le) => ({
