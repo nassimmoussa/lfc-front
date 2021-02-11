@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
   cardButtons: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(2),
   },
   cardButton: {
     [theme.breakpoints.up('md')]: {
@@ -76,5 +76,10 @@ export const useStyles = makeStyles((theme) => ({
   typeSelect: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
+  },
+
+  previewDiv: {
+    height: 400,
+    backgroundColor: theme.palette.secondary.light,
   },
 }));

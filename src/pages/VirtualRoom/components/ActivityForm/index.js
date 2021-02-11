@@ -10,6 +10,7 @@ import SelectWithSearch from 'components/SelectWithSearch';
 
 import { lEsListSelector } from 'store/modules/logicExpressions/selectors';
 
+import ActivityPreview from '../ActivityPreview';
 import { useStyles } from '../../styles';
 
 const ActivityForm = ({ submitActionProp, closeActionProp }) => {
@@ -18,6 +19,7 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
   const [selectedLE, setSelectedLE] = useState('');
   const [activityForm, setActivityForm] = useState({
     activityType: 'none',
+    logicExpression: {},
   });
 
   const options = logicExpressions.map((le) => ({
@@ -77,6 +79,11 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
           {PORTUGUES_TYPES.CHAINED_IF}
         </MenuItem>
       </Select>
+
+      <ActivityPreview
+        type={activityForm.activityType}
+        lE={activityForm.logicExpression}
+      />
 
       <div className={classes.cardButtons}>
         <Button
