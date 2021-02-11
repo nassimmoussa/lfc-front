@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.error.main,
   },
   addAtcivityForm: {
-    height: 600,
+    minHeight: 600,
   },
   navRight: {
     display: 'flex',
@@ -79,13 +79,17 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   previewDiv: {
-    height: 400,
+    minHeight: 400,
     backgroundColor: '#ccc',
   },
   activityContainer: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
     display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+      width: '100%',
+    },
   },
 
   activityCard: {
@@ -97,6 +101,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   activityRightCard: {
     flex: '1 1 35%',
+    [theme.breakpoints.down('sm')]: {
+      marginRight: '1rem',
+      marginTop: '1rem',
+    },
   },
 
   activityExpression: {

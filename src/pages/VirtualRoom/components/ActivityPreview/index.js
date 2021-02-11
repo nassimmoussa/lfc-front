@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import isempty from 'lodash.isempty';
 import { ACTIVITY_TYPES } from 'constants/activityTypes';
