@@ -72,9 +72,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   lESelect: {
     marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   typeSelect: {
-    marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
 

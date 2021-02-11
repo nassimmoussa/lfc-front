@@ -17,15 +17,24 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
   const classes = useStyles();
   const logicExpressions = useSelector(lEsListSelector);
   const [selectedLE, setSelectedLE] = useState('');
+  const [secondSelectedLE, setSecondSelectedLE] = useState('');
   const [activityForm, setActivityForm] = useState({
     activityType: 'none',
     logicExpression: {},
+    logicExpression2: {},
   });
 
   const options = logicExpressions.map((le) => ({
     value: le.id,
     label: le.title,
   }));
+
+  const options2 = logicExpressions
+    .filter((le) => le.id !== selectedLE.value)
+    .map((le) => ({
+      value: le.id,
+      label: le.title,
+    }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,11 +46,33 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
   };
 
   const selectChangeHandler = (selected) => {
-    setSelectedLE(selected);
-    setActivityForm({
-      ...activityForm,
-      logicExpression: logicExpressions.find((le) => le.id === selected.value),
-    });
+    if (selected) {
+      setSelectedLE(selected);
+      setActivityForm({
+        ...activityForm,
+        logicExpression: logicExpressions.find(
+          (le) => le.id === selected.value
+        ),
+      });
+    } else {
+      setSelectedLE('');
+      setActivityForm({ ...activityForm, logicExpression: {} });
+    }
+  };
+
+  const secondSelectChangeHandler = (selected) => {
+    if (selected) {
+      setSecondSelectedLE(selected);
+      setActivityForm({
+        ...activityForm,
+        logicExpression2: logicExpressions.find(
+          (le) => le.id === selected.value
+        ),
+      });
+    } else {
+      setSecondSelectedLE('');
+      setActivityForm({ ...activityForm, logicExpression2: {} });
+    }
   };
 
   const handleTypeChange = (activityType) => {
@@ -50,6 +81,16 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
       activityType: activityType.target.value,
     });
   };
+
+  const renderExtraExpressionSelect = () => (
+    <SelectWithSearch
+      placeholder="Selecione a segunda Expressão logica"
+      className={classes.lESelect}
+      options={options2}
+      handleChange={secondSelectChangeHandler}
+      selected={secondSelectedLE}
+    />
+  );
 
   return (
     <form onSubmit={handleSubmit} className={classes.addAtcivityForm}>
@@ -80,9 +121,14 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
         </MenuItem>
       </Select>
 
+      {activityForm.activityType === ACTIVITY_TYPES.CHAINED_IF
+        ? renderExtraExpressionSelect()
+        : null}
+
       <ActivityPreview
         type={activityForm.activityType}
         lE={activityForm.logicExpression}
+        lE2={activityForm.logicExpression2}
       />
 
       <div className={classes.cardButtons}>
