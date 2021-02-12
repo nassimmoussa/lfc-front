@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-import { newLogin, roomCleanup } from 'store/modules/room/actions';
+import { newLogin, roomCleanup, roomUpdate } from 'store/modules/room/actions';
 import {
   lEIndexLoadAction,
   lECleanUpAction,
@@ -30,6 +30,10 @@ const ProfessorRoom = ({ socket }) => {
 
   socket.on('room:new:login', ({ cpf }) => {
     dispatch(newLogin(cpf));
+  });
+
+  socket.on('room:add:activity:success', ({ room }) => {
+    dispatch(roomUpdate(room));
   });
 
   useEffect(() => {
@@ -65,6 +69,7 @@ const ProfessorRoom = ({ socket }) => {
       <AddAtcivityModal
         open={isOpenAddActivityModal}
         closeHandler={closeAddActivityModal}
+        socket={socket}
       />
     </div>
   );
