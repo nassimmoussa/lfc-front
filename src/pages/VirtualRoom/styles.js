@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%',
       paddingRight: theme.spacing(0),
     },
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
@@ -59,6 +59,7 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
+    marginTop: theme.spacing(1.5),
   },
   cardButtons: {
     display: 'flex',
@@ -130,5 +131,12 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '22px',
     display: 'block',
     marginBottom: '.25rem',
+  },
+  boldText: {
+    fontWeight: theme.typography.fontWeightBold,
+  },
+  deleteButton: {
+    color: theme.palette.secondary.light,
+    padding: 0,
   },
 }));

@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import { newLogin, roomCleanup, roomUpdate } from 'store/modules/room/actions';
 import {
@@ -28,6 +29,8 @@ const ProfessorRoom = ({ socket }) => {
     closeAddActivityModal,
     openAddActivityModal,
   ] = useModal();
+  const [minutes, setMinutes] = useState();
+  const [minutesError, setMinutesError] = useState();
 
   socket.on('room:new:login', ({ cpf }) => {
     dispatch(newLogin(cpf));
@@ -49,6 +52,14 @@ const ProfessorRoom = ({ socket }) => {
     };
   }, [dispatch]);
 
+  const startActivityHandler = () => {
+    if (!minutes) {
+      setMinutesError('informe a quantidade de minutos');
+    } else {
+      setMinutesError();
+    }
+  };
+
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -60,6 +71,29 @@ const ProfessorRoom = ({ socket }) => {
         <Grid item xs={12} sm={9}>
           <Paper className={classes.paper}>
             <div className={classes.navRight}>
+              <div className="">
+                <TextField
+                  id="standard-number"
+                  label="Quantidade de minutos"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  error={minutesError}
+                  helperText={minutesError}
+                  value={minutes}
+                  onChange={(e) => setMinutes(e.target.value)}
+                />
+
+                <Button
+                  className={classes.addButton}
+                  onClick={startActivityHandler}
+                  variant="text"
+                >
+                  começar a dinâmica
+                </Button>
+              </div>
+
               <Button
                 className={classes.addButton}
                 onClick={openAddActivityModal}
