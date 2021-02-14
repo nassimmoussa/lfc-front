@@ -19,9 +19,9 @@ const ActivityForm = ({ submitActionProp, closeActionProp }) => {
   const [selectedLE, setSelectedLE] = useState('');
   const [secondSelectedLE, setSecondSelectedLE] = useState('');
   const [activityForm, setActivityForm] = useState({
-    activityType: ACTIVITY_TYPES.CHAINED_IF,
-    logicExpression: logicExpressions[2],
-    logicExpression2: logicExpressions[3],
+    activityType: 'none',
+    logicExpression: {},
+    logicExpression2: {},
   });
 
   const options = logicExpressions.map((le) => ({

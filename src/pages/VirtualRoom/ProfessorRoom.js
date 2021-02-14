@@ -16,6 +16,7 @@ import useModal from 'hooks/useModal';
 
 import StudentList from './components/StudentList';
 import AddAtcivityModal from './components/AddAtcivityModal';
+import ProfessorActivityList from './components/ProfessorActivityList';
 
 import { useStyles } from './styles';
 
@@ -26,7 +27,7 @@ const ProfessorRoom = ({ socket }) => {
     isOpenAddActivityModal,
     closeAddActivityModal,
     openAddActivityModal,
-  ] = useModal(true);
+  ] = useModal();
 
   socket.on('room:new:login', ({ cpf }) => {
     dispatch(newLogin(cpf));
@@ -62,6 +63,8 @@ const ProfessorRoom = ({ socket }) => {
                 + ADICIONAR ATIVIDADE
               </Button>
             </div>
+
+            <ProfessorActivityList />
           </Paper>
         </Grid>
       </Grid>

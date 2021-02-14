@@ -16,3 +16,8 @@ export const studentsSelector = createSelector(
   roomDataSelector,
   (data) => data.students || []
 );
+
+export const activitySelector = createSelector(
+  roomDataSelector,
+  (data) => data.activities || []
+);
