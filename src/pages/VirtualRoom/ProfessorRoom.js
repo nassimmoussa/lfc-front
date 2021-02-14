@@ -37,6 +37,10 @@ const ProfessorRoom = ({ socket }) => {
     dispatch(roomUpdate(room));
   });
 
+  socket.on('room:remove:activity:success', ({ room }) => {
+    dispatch(roomUpdate(room));
+  });
+
   useEffect(() => {
     dispatch(lEIndexLoadAction());
     return () => {
@@ -64,7 +68,7 @@ const ProfessorRoom = ({ socket }) => {
               </Button>
             </div>
 
-            <ProfessorActivityList />
+            <ProfessorActivityList socket={socket} />
           </Paper>
         </Grid>
       </Grid>

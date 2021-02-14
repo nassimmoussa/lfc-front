@@ -14,7 +14,7 @@ import { activitySelector } from 'store/modules/room/selectors';
 import ActivityTableItem from './ActivityTableItem';
 import { useStyles } from '../../styles';
 
-const ProfessorActivityList = () => {
+const ProfessorActivityList = ({ socket }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -53,7 +53,11 @@ const ProfessorActivityList = () => {
             {activities
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((activity) => (
-                <ActivityTableItem activity={activity} key={activity.id} />
+                <ActivityTableItem
+                  activity={activity}
+                  key={activity.id}
+                  socket={socket}
+                />
               ))}
           </TableBody>
         </Table>

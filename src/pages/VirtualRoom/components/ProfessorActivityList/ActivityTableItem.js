@@ -9,14 +9,17 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import ConfirmModal from 'components/ConfirmModal';
 import useModal from 'hooks/useModal';
+import { useParams } from 'react-router-dom';
 
 import { useStyles } from '../../styles';
 
-const ActivityTableItem = ({ activity }) => {
+const ActivityTableItem = ({ activity, socket }) => {
+  const { roomId } = useParams();
   const classes = useStyles();
   const [deleteModalIsOpen, deleteModalClose, deleteModalOpen] = useModal();
 
   const deleteClickHandler = () => {
+    socket.emit('room:remove:activity', { roomId, activityId: activity.id });
     deleteModalClose();
   };
 
