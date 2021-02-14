@@ -139,4 +139,20 @@ export const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.light,
     padding: 0,
   },
+  correctResponse: {
+    marginTop: theme.spacing(1),
+    color: '#5cb85c',
+    fontWeight: theme.typography.fontWeightBold,
+  },
+  wrongResponse: {
+    fontWeight: theme.typography.fontWeightBold,
+    marginTop: theme.spacing(1),
+    color: '#d9534f',
+  },
+  correctButton: {
+    backgroundColor: '#5cb85c !important',
+  },
+  wrongButton: {
+    backgroundColor: '#d9534f !important',
+  },
 }));

@@ -17,6 +17,12 @@ const LEActivity = ({ lE }) => {
       </span>
     ));
 
+  const renderResponseStatus = () => (
+    <Typography variant="subtitle1" className={classes.wrongResponse}>
+      Resposta errada
+    </Typography>
+  );
+
   return (
     <div className={classes.activityContainer}>
       <Paper
@@ -40,18 +46,21 @@ const LEActivity = ({ lE }) => {
           <Button
             variant="contained"
             color="primary"
-            className={classes.activityBtn}
+            className={`${classes.activityBtn} ${classes.correctButton}`}
+            disabled
           >
             True
           </Button>
           <Button
             variant="contained"
             color="secondary"
-            className={classes.activityBtn}
+            className={`${classes.activityBtn} ${classes.wrongButton}`}
+            disabled
           >
             False
           </Button>
         </div>
+        {renderResponseStatus()}
       </Paper>
       <Paper
         elevation={3}
