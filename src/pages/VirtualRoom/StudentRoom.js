@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import { newLogin } from 'store/modules/room/actions';
 import { loggedStudentSelector } from 'store/modules/room/selectors';
@@ -11,6 +12,7 @@ import { loggedStudentSelector } from 'store/modules/room/selectors';
 import StudentList from './components/StudentList';
 
 import StudentLogin from './components/StudentLogin';
+import Activities from './components/Activities';
 import { useStyles } from './styles';
 
 const StudentRoom = ({ socket }) => {
@@ -35,7 +37,10 @@ const StudentRoom = ({ socket }) => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={9}>
-          <Paper className={classes.paper}>Student Room</Paper>
+          <Paper className={classes.paper}>
+            <Typography variant="h3">Atividades</Typography>
+            <Activities socket={socket} />
+          </Paper>
         </Grid>
       </Grid>
     </div>
