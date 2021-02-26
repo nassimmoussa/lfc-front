@@ -39,7 +39,7 @@ const Home = () => {
         history.push(`${ROUTER_PATH.VIRTUAL_ROOM}/${roomId}`);
       });
     }
-  }, [socket]);
+  }, [socket, history, dispatch]);
 
   if (!socket) {
     return <Loading />;

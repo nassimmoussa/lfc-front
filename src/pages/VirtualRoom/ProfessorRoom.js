@@ -46,7 +46,7 @@ const ProfessorRoom = ({ socket }) => {
         dispatch(roomUpdate(room));
       });
     }
-  }, [socket]);
+  }, [socket, dispatch]);
 
   useEffect(() => {
     dispatch(lEIndexLoadAction());

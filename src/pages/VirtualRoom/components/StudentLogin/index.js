@@ -36,7 +36,7 @@ const StudentLoginModal = ({ socket }) => {
         dispatch(studentLoginSuccess(room, cpf));
       });
     }
-  }, [socket]);
+  }, [socket, dispatch]);
 
   const validate = () => {
     setError(!validator.isValidSync(CPF));

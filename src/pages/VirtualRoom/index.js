@@ -37,7 +37,7 @@ const VirtualRoom = () => {
         dispatch(roomUpdate(room));
       });
     }
-  }, [socket]);
+  }, [socket, dispatch]);
 
   if (!socket) {
     return <Loading />;

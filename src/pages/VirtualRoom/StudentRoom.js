@@ -26,7 +26,7 @@ const StudentRoom = ({ socket }) => {
         dispatch(newLogin(cpf));
       });
     }
-  }, [socket]);
+  }, [socket, dispatch]);
 
   if (!loggedStudent) {
     return <StudentLogin socket={socket} />;
