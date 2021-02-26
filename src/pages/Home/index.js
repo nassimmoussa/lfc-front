@@ -30,6 +30,17 @@ const Home = () => {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    if (socket) {
+      socket.on('room:created', ({ roomId }) => {
+        dispatch(
+          successNotificationAction(`sala criada com sucesso id: ${roomId}`)
+        );
+        history.push(`${ROUTER_PATH.VIRTUAL_ROOM}/${roomId}`);
+      });
+    }
+  }, [socket]);
+
   if (!socket) {
     return <Loading />;
   }
@@ -37,13 +48,6 @@ const Home = () => {
   const createRoomHandler = () => {
     socket.emit('room:create', { students });
   };
-
-  socket.on('room:created', ({ roomId }) => {
-    dispatch(
-      successNotificationAction(`sala criada com sucesso id: ${roomId}`)
-    );
-    history.push(`${ROUTER_PATH.VIRTUAL_ROOM}/${roomId}`);
-  });
 
   return (
     <div>

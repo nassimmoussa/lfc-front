@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -22,17 +22,21 @@ const StudentLoginModal = ({ socket }) => {
   const [error, setError] = useState(false);
   const validator = Yup.string().min(11).max(11).required();
 
-  socket.on('room:login:fail', () => {
-    dispatch(
-      errorNotificationAction(
-        'Erro ao efetuar o login, CPF não permetido na sala'
-      )
-    );
-  });
+  useEffect(() => {
+    if (socket) {
+      socket.on('room:login:fail', () => {
+        dispatch(
+          errorNotificationAction(
+            'Erro ao efetuar o login, CPF não permetido na sala'
+          )
+        );
+      });
 
-  socket.on('room:login:success', ({ room, cpf }) => {
-    dispatch(studentLoginSuccess(room, cpf));
-  });
+      socket.on('room:login:success', ({ room, cpf }) => {
+        dispatch(studentLoginSuccess(room, cpf));
+      });
+    }
+  }, [socket]);
 
   const validate = () => {
     setError(!validator.isValidSync(CPF));

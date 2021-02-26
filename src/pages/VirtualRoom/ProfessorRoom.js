@@ -32,17 +32,21 @@ const ProfessorRoom = ({ socket }) => {
   const [minutes, setMinutes] = useState();
   const [minutesError, setMinutesError] = useState();
 
-  socket.on('room:new:login', ({ cpf }) => {
-    dispatch(newLogin(cpf));
-  });
+  useEffect(() => {
+    if (socket) {
+      socket.on('room:new:login', ({ cpf }) => {
+        dispatch(newLogin(cpf));
+      });
 
-  socket.on('room:add:activity:success', ({ room }) => {
-    dispatch(roomUpdate(room));
-  });
+      socket.on('room:add:activity:success', ({ room }) => {
+        dispatch(roomUpdate(room));
+      });
 
-  socket.on('room:remove:activity:success', ({ room }) => {
-    dispatch(roomUpdate(room));
-  });
+      socket.on('room:remove:activity:success', ({ room }) => {
+        dispatch(roomUpdate(room));
+      });
+    }
+  }, [socket]);
 
   useEffect(() => {
     dispatch(lEIndexLoadAction());

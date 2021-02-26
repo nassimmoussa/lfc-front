@@ -25,19 +25,23 @@ const VirtualRoom = () => {
   }, [socket, loggedIn, roomId]);
 
   useEffect(() => {
-    // dispatch(roomCleanup());
+    dispatch(roomCleanup());
     return () => {
       dispatch(roomCleanup());
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    if (socket) {
+      socket.on('room:joined', ({ room }) => {
+        dispatch(roomUpdate(room));
+      });
+    }
+  }, [socket]);
+
   if (!socket) {
     return <Loading />;
   }
-
-  socket.on('room:joined', ({ room }) => {
-    dispatch(roomUpdate(room));
-  });
 
   return loggedIn ? (
     <ProfessorRoom socket={socket} />

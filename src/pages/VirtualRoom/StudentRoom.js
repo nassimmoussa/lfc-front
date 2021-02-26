@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -20,13 +20,17 @@ const StudentRoom = ({ socket }) => {
   const loggedStudent = useSelector(loggedStudentSelector);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (socket) {
+      socket.on('room:new:login', ({ cpf }) => {
+        dispatch(newLogin(cpf));
+      });
+    }
+  }, [socket]);
+
   if (!loggedStudent) {
     return <StudentLogin socket={socket} />;
   }
-
-  socket.on('room:new:login', ({ cpf }) => {
-    dispatch(newLogin(cpf));
-  });
 
   return (
     <div className={classes.root}>
