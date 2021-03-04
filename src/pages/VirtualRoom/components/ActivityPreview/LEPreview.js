@@ -42,14 +42,14 @@ const LEPreview = ({ lE }) => {
             color="primary"
             className={classes.activityBtn}
           >
-            True
+            Verdadeiro
           </Button>
           <Button
             variant="contained"
             color="secondary"
             className={classes.activityBtn}
           >
-            False
+            Falso
           </Button>
         </div>
       </Paper>

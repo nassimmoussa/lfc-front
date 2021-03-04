@@ -49,7 +49,7 @@ const LEActivity = ({ lE }) => {
             className={`${classes.activityBtn} ${classes.correctButton}`}
             disabled
           >
-            True
+            Verdadeiro
           </Button>
           <Button
             variant="contained"
@@ -57,7 +57,7 @@ const LEActivity = ({ lE }) => {
             className={`${classes.activityBtn} ${classes.wrongButton}`}
             disabled
           >
-            False
+            Falso
           </Button>
         </div>
         {renderResponseStatus()}
