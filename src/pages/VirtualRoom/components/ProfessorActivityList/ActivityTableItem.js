@@ -28,7 +28,15 @@ const ActivityTableItem = ({ activity, socket }) => {
   };
 
   const renderStudents = () =>
-    activity.students && activity.students.join(', ');
+    activity.responses.map((response, index) => (
+      <span
+        className={
+          response.correct ? classes.correctResponse : classes.wrongResponse
+        }
+      >
+        {response.name} {index === activity.responses.length - 1 ? null : ' - '}
+      </span>
+    ));
 
   const renderExtraLE = () =>
     activity.logicExpression2 &&
