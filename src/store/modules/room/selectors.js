@@ -21,3 +21,8 @@ export const activitySelector = createSelector(
   roomDataSelector,
   (data) => data.activities || []
 );
+
+export const activityStartedSelector = createSelector(
+  roomDataSelector,
+  (data) => data.activityStarted
+);

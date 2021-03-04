@@ -7,7 +7,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import { newLogin } from 'store/modules/room/actions';
-import { loggedStudentSelector } from 'store/modules/room/selectors';
+import {
+  loggedStudentSelector,
+  activityStartedSelector,
+} from 'store/modules/room/selectors';
 
 import StudentList from './components/StudentList';
 
@@ -18,6 +21,7 @@ import { useStyles } from './styles';
 const StudentRoom = ({ socket }) => {
   const classes = useStyles();
   const loggedStudent = useSelector(loggedStudentSelector);
+  const activityStarted = useSelector(activityStartedSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,7 +47,14 @@ const StudentRoom = ({ socket }) => {
         <Grid item xs={12} sm={9}>
           <Paper className={classes.paper}>
             <Typography variant="h3">Atividades</Typography>
-            <Activities socket={socket} />
+            {activityStarted ? (
+              <Activities socket={socket} />
+            ) : (
+              <Typography variant="h5">
+                As atividades ainda não foram liberadas pelo professor...
+                aguarde o início da dinâmica
+              </Typography>
+            )}
           </Paper>
         </Grid>
       </Grid>
