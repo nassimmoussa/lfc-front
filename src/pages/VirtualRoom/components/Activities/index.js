@@ -30,11 +30,15 @@ const Activities = ({ socket }) => {
   };
 
   const renderActivity = (activity) => {
+    const studentResponse = activity.responses.find(
+      (response) => response.cpf === student.cpf
+    );
     if (activity.activityType === ACTIVITY_TYPES.LOGICAL_EXPRESSION)
       return (
         <LEActivity
           lE={activity.logicExpression}
           onResponse={(response) => studentResponseHandler(response, activity)}
+          studentResponse={studentResponse}
         />
       );
     if (activity.activityType === ACTIVITY_TYPES.IF)
@@ -42,6 +46,7 @@ const Activities = ({ socket }) => {
         <IfActivity
           lE={activity.logicExpression}
           onResponse={(result) => studentResponseHandler(result, activity.id)}
+          studentResponse={studentResponse}
         />
       );
     return (
@@ -49,6 +54,7 @@ const Activities = ({ socket }) => {
         lE={activity.logicExpression2}
         lE2={activity.logicExpression2}
         onResponse={(result) => studentResponseHandler(result, activity.id)}
+        studentResponse={studentResponse}
       />
     );
   };

@@ -7,8 +7,42 @@ import Paper from '@material-ui/core/Paper';
 
 import { useStyles } from '../../styles';
 
-const LEActivity = ({ lE, onResponse }) => {
+const LEActivity = ({ lE, onResponse, studentResponse }) => {
   const classes = useStyles();
+
+  const getTrueButtonClasses = () => {
+    if (!studentResponse) {
+      return classes.activityBtn;
+    }
+
+    const btnClasses = [classes.activityBtn];
+    if (lE.result && studentResponse.response === 'TRUE') {
+      btnClasses.push(classes.correctButton);
+    }
+
+    if (!lE.result && studentResponse.response === 'TRUE') {
+      btnClasses.push(classes.wrongButton);
+    }
+
+    return btnClasses.join(' ');
+  };
+
+  const getFalseButtonClasses = () => {
+    if (!studentResponse) {
+      return classes.activityBtn;
+    }
+
+    const btnClasses = [classes.activityBtn];
+    if (lE.result && studentResponse.response === 'FALSE') {
+      btnClasses.push(classes.wrongButton);
+    }
+
+    if (!lE.result && studentResponse.response === 'TRUE') {
+      btnClasses.push(classes.correctButton);
+    }
+
+    return btnClasses.join(' ');
+  };
 
   const renderVariables = () =>
     lE.variables.map((variable) => (
@@ -17,11 +51,20 @@ const LEActivity = ({ lE, onResponse }) => {
       </span>
     ));
 
-  const renderResponseStatus = () => (
-    <Typography variant="subtitle1" className={classes.wrongResponse}>
-      Resposta errada
-    </Typography>
-  );
+  const renderResponseStatus = () => {
+    if (!studentResponse) {
+      return '';
+    }
+    return studentResponse.correct ? (
+      <Typography variant="subtitle1" className={classes.correctResponse}>
+        Resposta correta
+      </Typography>
+    ) : (
+      <Typography variant="subtitle1" className={classes.wrongResponse}>
+        Resposta errada
+      </Typography>
+    );
+  };
 
   return (
     <div className={classes.activityContainer}>
@@ -46,16 +89,18 @@ const LEActivity = ({ lE, onResponse }) => {
           <Button
             variant="contained"
             color="primary"
-            className={`${classes.activityBtn} ${classes.correctButton}`}
+            className={getTrueButtonClasses()}
             onClick={() => onResponse('TRUE')}
+            disabled={!!studentResponse}
           >
             Verdadeiro
           </Button>
           <Button
             variant="contained"
             color="secondary"
-            className={`${classes.activityBtn} ${classes.wrongButton}`}
+            className={getFalseButtonClasses()}
             onClick={() => onResponse('FALSE')}
+            disabled={!!studentResponse}
           >
             Falso
           </Button>
