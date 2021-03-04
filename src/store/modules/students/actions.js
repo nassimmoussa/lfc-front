@@ -94,7 +94,7 @@ export const studentSearchAction = (searchText) => {
 
 export const addStudentToRoom = (student) => ({
   type: STUDENT_ADD_TO_ROOM,
-  data: student,
+  data: { ...student, responses: [] },
 });
 
 export const removeStudentFromRoom = (student) => ({

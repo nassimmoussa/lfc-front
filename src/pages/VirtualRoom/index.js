@@ -40,6 +40,10 @@ const VirtualRoom = () => {
       socket.on('room:start:activity:success', ({ room }) => {
         dispatch(roomUpdate(room));
       });
+
+      socket.on('student:activity:response:success', ({ room }) => {
+        dispatch(roomUpdate(room));
+      });
     }
   }, [socket, dispatch]);
 

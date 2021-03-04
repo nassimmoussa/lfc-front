@@ -26,3 +26,10 @@ export const activityStartedSelector = createSelector(
   roomDataSelector,
   (data) => data.activityStarted
 );
+
+export const loggedStudentDataSelector = createSelector(
+  studentsSelector,
+  loggedStudentSelector,
+  (students, loggedStudent) =>
+    students.find((studnet) => studnet.cpf === loggedStudent)
+);

@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { useStyles } from '../../styles';
 
-const ChainedIfActivity = ({ lE, lE2 }) => {
+const ChainedIfActivity = ({ lE, lE2, onResponse }) => {
   const classes = useStyles();
 
   const renderVariables = () => {
@@ -38,19 +38,31 @@ const ChainedIfActivity = ({ lE, lE2 }) => {
           <Typography variant="h5" gutterBottom>
             if ({lE.text}) {'{'}
           </Typography>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onResponse('FIRST')}
+          >
             Bloco a ser executado
           </Button>
           <Typography variant="h5" gutterBottom>
             {'}'} else if({lE2.text}) {'{'}
           </Typography>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onResponse('SECOND')}
+          >
             Bloco a ser executado
           </Button>
           <Typography variant="h5" gutterBottom>
             {'}'} else {'{'}
           </Typography>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onResponse('THIRD')}
+          >
             Bloco a ser executado
           </Button>
           <Typography variant="h5" gutterBottom>
