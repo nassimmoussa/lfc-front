@@ -25,7 +25,7 @@ const VirtualRoom = () => {
   }, [socket, loggedIn, roomId]);
 
   useEffect(() => {
-    // dispatch(roomCleanup());
+    dispatch(roomCleanup());
     return () => {
       dispatch(roomCleanup());
     };
@@ -34,6 +34,10 @@ const VirtualRoom = () => {
   useEffect(() => {
     if (socket) {
       socket.on('room:joined', ({ room }) => {
+        dispatch(roomUpdate(room));
+      });
+
+      socket.on('room:start:activity:success', ({ room }) => {
         dispatch(roomUpdate(room));
       });
     }

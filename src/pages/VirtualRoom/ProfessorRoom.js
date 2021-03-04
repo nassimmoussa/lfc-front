@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
@@ -22,6 +23,7 @@ import ProfessorActivityList from './components/ProfessorActivityList';
 import { useStyles } from './styles';
 
 const ProfessorRoom = ({ socket }) => {
+  const { roomId } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [
@@ -60,6 +62,7 @@ const ProfessorRoom = ({ socket }) => {
     if (!minutes) {
       setMinutesError('informe a quantidade de minutos');
     } else {
+      socket.emit('room:start:activity', { roomId });
       setMinutesError();
     }
   };
