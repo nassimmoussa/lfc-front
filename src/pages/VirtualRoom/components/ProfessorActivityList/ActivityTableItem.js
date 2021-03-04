@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { PORTUGUES_TYPES } from 'constants/activityTypes';
 
 import TableRow from '@material-ui/core/TableRow';
@@ -9,13 +11,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import ConfirmModal from 'components/ConfirmModal';
 import useModal from 'hooks/useModal';
-import { useParams } from 'react-router-dom';
+
+import { activityStartedSelector } from 'store/modules/room/selectors';
 
 import { useStyles } from '../../styles';
 
 const ActivityTableItem = ({ activity, socket }) => {
   const { roomId } = useParams();
   const classes = useStyles();
+  const activityStarted = useSelector(activityStartedSelector);
   const [deleteModalIsOpen, deleteModalClose, deleteModalOpen] = useModal();
 
   const deleteClickHandler = () => {
@@ -40,7 +44,11 @@ const ActivityTableItem = ({ activity, socket }) => {
         <TableCell>{PORTUGUES_TYPES[activity.activityType]}</TableCell>
         <TableCell>{renderStudents()}</TableCell>
         <TableCell>
-          <Button className={classes.deleteButton} onClick={deleteModalOpen}>
+          <Button
+            className={classes.deleteButton}
+            onClick={deleteModalOpen}
+            disabled={activityStarted}
+          >
             <DeleteIcon />
           </Button>
         </TableCell>

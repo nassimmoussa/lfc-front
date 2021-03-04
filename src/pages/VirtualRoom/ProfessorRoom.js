@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { newLogin, roomCleanup, roomUpdate } from 'store/modules/room/actions';
+import { activityStartedSelector } from 'store/modules/room/selectors';
 import {
   lEIndexLoadAction,
   lECleanUpAction,
@@ -26,6 +27,7 @@ const ProfessorRoom = ({ socket }) => {
   const { roomId } = useParams();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const activityStarted = useSelector(activityStartedSelector);
   const [
     isOpenAddActivityModal,
     closeAddActivityModal,
@@ -96,6 +98,7 @@ const ProfessorRoom = ({ socket }) => {
                   className={classes.addButton}
                   onClick={startActivityHandler}
                   variant="text"
+                  disabled={activityStarted}
                 >
                   começar a dinâmica
                 </Button>
@@ -104,6 +107,7 @@ const ProfessorRoom = ({ socket }) => {
               <Button
                 className={classes.addButton}
                 onClick={openAddActivityModal}
+                disabled={activityStarted}
               >
                 + ADICIONAR ATIVIDADE
               </Button>
