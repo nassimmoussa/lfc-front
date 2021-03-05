@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { useStyles } from '../../styles';
 
-const IfActivity = ({ lE, onResponse }) => {
+const IfActivity = ({ lE, onResponse, studentResponse }) => {
   const classes = useStyles();
 
   const renderVariables = () =>
@@ -15,6 +15,49 @@ const IfActivity = ({ lE, onResponse }) => {
         {variable.name} = {variable.value}
       </span>
     ));
+  const getFirstButtonClasses = () => {
+    if (!studentResponse) {
+      return classes.activityBtn;
+    }
+
+    if (lE.result && studentResponse.response === 'FIRST') {
+      return classes.correctButton;
+    }
+
+    if (!lE.result && studentResponse.response === 'FIRST') {
+      return classes.wrongButton;
+    }
+  };
+
+  const getSecondButtonClasses = () => {
+    if (!studentResponse) {
+      return classes.activityBtn;
+    }
+
+    if (lE.result && studentResponse.response === 'SECOND') {
+      return classes.wrongButton;
+    }
+
+    if (!lE.result && studentResponse.response === 'SECOND') {
+      return classes.correctButton;
+    }
+  };
+
+  const renderResponseStatus = () => {
+    if (!studentResponse) {
+      return '';
+    }
+    return studentResponse.correct ? (
+      <Typography variant="subtitle1" className={classes.correctResponse}>
+        Resposta correta
+      </Typography>
+    ) : (
+      <Typography variant="subtitle1" className={classes.wrongResponse}>
+        Resposta errada
+      </Typography>
+    );
+  };
+
   return (
     <div className={classes.activityContainer}>
       <Paper
@@ -31,7 +74,9 @@ const IfActivity = ({ lE, onResponse }) => {
           <Button
             variant="contained"
             color="primary"
+            className={getFirstButtonClasses()}
             onClick={() => onResponse('FIRST')}
+            disabled={!!studentResponse}
           >
             Bloco a ser executado
           </Button>
@@ -41,7 +86,9 @@ const IfActivity = ({ lE, onResponse }) => {
           <Button
             variant="contained"
             color="primary"
+            className={getSecondButtonClasses()}
             onClick={() => onResponse('SECOND')}
+            disabled={!!studentResponse}
           >
             Bloco a ser executado
           </Button>
@@ -49,6 +96,7 @@ const IfActivity = ({ lE, onResponse }) => {
             {'}'}
           </Typography>
         </div>
+        {renderResponseStatus()}
       </Paper>
       <Paper
         elevation={3}

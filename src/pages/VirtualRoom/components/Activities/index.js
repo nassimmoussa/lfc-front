@@ -45,7 +45,7 @@ const Activities = ({ socket }) => {
       return (
         <IfActivity
           lE={activity.logicExpression}
-          onResponse={(result) => studentResponseHandler(result, activity.id)}
+          onResponse={(result) => studentResponseHandler(result, activity)}
           studentResponse={studentResponse}
         />
       );
@@ -53,7 +53,7 @@ const Activities = ({ socket }) => {
       <ChainedIfActivity
         lE={activity.logicExpression2}
         lE2={activity.logicExpression2}
-        onResponse={(result) => studentResponseHandler(result, activity.id)}
+        onResponse={(result) => studentResponseHandler(result, activity)}
         studentResponse={studentResponse}
       />
     );
