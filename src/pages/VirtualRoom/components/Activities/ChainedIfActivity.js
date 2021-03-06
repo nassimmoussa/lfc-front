@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { useStyles } from '../../styles';
 
-const ChainedIfActivity = ({ lE, lE2, onResponse }) => {
+const ChainedIfActivity = ({ lE, lE2, onResponse, studentResponse }) => {
   const classes = useStyles();
 
   const renderVariables = () => {
@@ -23,6 +23,61 @@ const ChainedIfActivity = ({ lE, lE2, onResponse }) => {
         {variable.name} = {variable.value}
       </span>
     ));
+  };
+
+  // eslint-disable-next-line consistent-return
+  const getFirstButtonClasses = () => {
+    if (!studentResponse) {
+      return classes.activityBtn;
+    }
+
+    if (lE.result) {
+      return classes.correctButton;
+    }
+
+    if (!lE.result && studentResponse.response === 'FIRST') {
+      return classes.wrongButton;
+    }
+  };
+  // eslint-disable-next-line consistent-return
+  const getSecondButtonClasses = () => {
+    if (!studentResponse) {
+      return classes.activityBtn;
+    }
+
+    if ((lE.result || !lE2.result) && studentResponse.response === 'SECOND')
+      return classes.wrongButton;
+
+    if (!lE.result && lE2.result) return classes.correctButton;
+  };
+  // eslint-disable-next-line consistent-return
+  const getThirdButtonClasses = () => {
+    if (!studentResponse) {
+      return classes.activityBtn;
+    }
+
+    if (lE.result && studentResponse.response === 'THIRD')
+      return classes.wrongButton;
+
+    if (!lE.result && lE2.result && studentResponse.response === 'THIRD')
+      return classes.wrongButton;
+
+    if (!lE.result && !lE2.result) return classes.correctButton;
+  };
+
+  const renderResponseStatus = () => {
+    if (!studentResponse) {
+      return '';
+    }
+    return studentResponse.correct ? (
+      <Typography variant="subtitle1" className={classes.correctResponse}>
+        Resposta correta
+      </Typography>
+    ) : (
+      <Typography variant="subtitle1" className={classes.wrongResponse}>
+        Resposta errada
+      </Typography>
+    );
   };
 
   return (
@@ -42,6 +97,8 @@ const ChainedIfActivity = ({ lE, lE2, onResponse }) => {
             variant="contained"
             color="primary"
             onClick={() => onResponse('FIRST')}
+            className={getFirstButtonClasses()}
+            disabled={!!studentResponse}
           >
             Bloco a ser executado
           </Button>
@@ -52,6 +109,8 @@ const ChainedIfActivity = ({ lE, lE2, onResponse }) => {
             variant="contained"
             color="primary"
             onClick={() => onResponse('SECOND')}
+            className={getSecondButtonClasses()}
+            disabled={!!studentResponse}
           >
             Bloco a ser executado
           </Button>
@@ -62,6 +121,8 @@ const ChainedIfActivity = ({ lE, lE2, onResponse }) => {
             variant="contained"
             color="primary"
             onClick={() => onResponse('THIRD')}
+            className={getThirdButtonClasses()}
+            disabled={!!studentResponse}
           >
             Bloco a ser executado
           </Button>
@@ -69,6 +130,7 @@ const ChainedIfActivity = ({ lE, lE2, onResponse }) => {
             {'}'}
           </Typography>
         </div>
+        {renderResponseStatus()}
       </Paper>
       <Paper
         elevation={3}

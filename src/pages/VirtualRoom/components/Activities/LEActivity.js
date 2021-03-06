@@ -15,13 +15,16 @@ const LEActivity = ({ lE, onResponse, studentResponse }) => {
       return classes.activityBtn;
     }
 
-    if (lE.result && studentResponse.response === 'TRUE') {
-      return classes.correctButton;
+    const btnClasses = [classes.activityBtn];
+    if (lE.result) {
+      btnClasses.push(classes.correctButton);
     }
 
     if (!lE.result && studentResponse.response === 'TRUE') {
-      return classes.wrongButton;
+      btnClasses.push(classes.wrongButton);
     }
+
+    return btnClasses.join(' ');
   };
 
   const getFalseButtonClasses = () => {
@@ -29,13 +32,16 @@ const LEActivity = ({ lE, onResponse, studentResponse }) => {
       return classes.activityBtn;
     }
 
+    const btnClasses = [classes.activityBtn];
     if (lE.result && studentResponse.response === 'FALSE') {
-      return classes.wrongButton;
+      btnClasses.push(classes.wrongButton);
     }
 
-    if (!lE.result && studentResponse.response === 'FALSE') {
-      return classes.correctButton;
+    if (!lE.result) {
+      btnClasses.push(classes.correctButton);
     }
+
+    return btnClasses.join(' ');
   };
 
   const renderVariables = () =>

@@ -15,12 +15,14 @@ const IfActivity = ({ lE, onResponse, studentResponse }) => {
         {variable.name} = {variable.value}
       </span>
     ));
+
+  // eslint-disable-next-line consistent-return
   const getFirstButtonClasses = () => {
     if (!studentResponse) {
       return classes.activityBtn;
     }
 
-    if (lE.result && studentResponse.response === 'FIRST') {
+    if (lE.result) {
       return classes.correctButton;
     }
 
@@ -29,6 +31,7 @@ const IfActivity = ({ lE, onResponse, studentResponse }) => {
     }
   };
 
+  // eslint-disable-next-line consistent-return
   const getSecondButtonClasses = () => {
     if (!studentResponse) {
       return classes.activityBtn;
@@ -38,7 +41,7 @@ const IfActivity = ({ lE, onResponse, studentResponse }) => {
       return classes.wrongButton;
     }
 
-    if (!lE.result && studentResponse.response === 'SECOND') {
+    if (!lE.result) {
       return classes.correctButton;
     }
   };
