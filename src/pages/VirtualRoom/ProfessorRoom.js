@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Timer from 'components/Timer';
 
 import { newLogin, roomCleanup, roomUpdate } from 'store/modules/room/actions';
 import { activityStartedSelector } from 'store/modules/room/selectors';
@@ -64,7 +65,7 @@ const ProfessorRoom = ({ socket }) => {
     if (!minutes) {
       setMinutesError('informe a quantidade de minutos');
     } else {
-      socket.emit('room:start:activity', { roomId });
+      socket.emit('room:start:activity', { roomId, minutes });
       setMinutesError();
     }
   };
@@ -81,18 +82,22 @@ const ProfessorRoom = ({ socket }) => {
           <Paper className={classes.paper}>
             <div className={classes.navRight}>
               <div className="">
-                <TextField
-                  id="standard-number"
-                  label="Quantidade de minutos"
-                  type="number"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  error={minutesError}
-                  helperText={minutesError}
-                  value={minutes}
-                  onChange={(e) => setMinutes(e.target.value)}
-                />
+                {activityStarted ? (
+                  <Timer />
+                ) : (
+                  <TextField
+                    id="standard-number"
+                    label="Quantidade de minutos"
+                    type="number"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    error={minutesError}
+                    helperText={minutesError}
+                    value={minutes}
+                    onChange={(e) => setMinutes(e.target.value)}
+                  />
+                )}
 
                 <Button
                   className={classes.addButton}

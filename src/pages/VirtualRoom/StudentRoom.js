@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Timer from 'components/Timer';
 
 import { newLogin } from 'store/modules/room/actions';
 import {
@@ -46,7 +47,10 @@ const StudentRoom = ({ socket }) => {
         </Grid>
         <Grid item xs={12} sm={9}>
           <Paper className={classes.paper}>
-            <Typography variant="h3">Atividades</Typography>
+            <div className={classes.studentTimerContainer}>
+              <Typography variant="h3">Atividades</Typography>
+              <Timer />
+            </div>
             {activityStarted ? (
               <Activities socket={socket} />
             ) : (

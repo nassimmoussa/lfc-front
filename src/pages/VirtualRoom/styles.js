@@ -155,4 +155,12 @@ export const useStyles = makeStyles((theme) => ({
   wrongButton: {
     backgroundColor: '#d9534f !important',
   },
+  studentTimerContainer: {
+    display: 'flex',
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+      width: '100%',
+    },
+    justifyContent: 'space-between',
+  },
 }));

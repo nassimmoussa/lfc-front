@@ -33,3 +33,8 @@ export const loggedStudentDataSelector = createSelector(
   (students, loggedStudent) =>
     students.find((studnet) => studnet.cpf === loggedStudent)
 );
+
+export const finishTimeSelector = createSelector(
+  roomDataSelector,
+  (data) => new Date(data.finishTime)
+);
