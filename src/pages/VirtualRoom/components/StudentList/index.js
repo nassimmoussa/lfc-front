@@ -15,15 +15,17 @@ const StudentList = () => {
   return (
     <div>
       <div className={classes.cardStudentLine}>
-        <Typography variant="subtitle1">Posição</Typography>
         <Typography variant="subtitle1">Aluno</Typography>
+        <Typography variant="subtitle1">Respostas</Typography>
         <Typography variant="subtitle1">Online</Typography>
       </div>
 
-      {students.map((student, index) => (
+      {students.map((student) => (
         <div className={classes.cardStudentLine} key={student.id}>
-          <Typography variant="subtitle1">{index + 1}ª</Typography>
           <Typography variant="subtitle1">{student.name}</Typography>
+          <Typography variant="subtitle1">
+            {student.responses.length}
+          </Typography>
           {student.loggedIn ? (
             <FiberManualRecordIcon className={classes.online} />
           ) : (

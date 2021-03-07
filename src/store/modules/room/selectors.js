@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { rankStudents } from './helpers';
 
 export const roomSelector = (state) => state.room;
 
@@ -37,4 +38,14 @@ export const loggedStudentDataSelector = createSelector(
 export const finishTimeSelector = createSelector(
   roomDataSelector,
   (data) => new Date(data.finishTime)
+);
+
+export const activityDoneSelector = createSelector(
+  roomDataSelector,
+  (data) => data.allStudentsDone || data.timeDone
+);
+
+export const rankedStudentsSelector = createSelector(
+  studentsSelector,
+  rankStudents
 );

@@ -10,7 +10,10 @@ import TextField from '@material-ui/core/TextField';
 import Timer from 'components/Timer';
 
 import { newLogin, roomCleanup, roomUpdate } from 'store/modules/room/actions';
-import { activityStartedSelector } from 'store/modules/room/selectors';
+import {
+  activityStartedSelector,
+  activityDoneSelector,
+} from 'store/modules/room/selectors';
 import {
   lEIndexLoadAction,
   lECleanUpAction,
@@ -21,6 +24,7 @@ import useModal from 'hooks/useModal';
 import StudentList from './components/StudentList';
 import AddAtcivityModal from './components/AddAtcivityModal';
 import ProfessorActivityList from './components/ProfessorActivityList';
+import RankedStudentsTable from './components/RankedStudentsTable';
 
 import { useStyles } from './styles';
 
@@ -29,6 +33,7 @@ const ProfessorRoom = ({ socket }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const activityStarted = useSelector(activityStartedSelector);
+  const activityDone = useSelector(activityDoneSelector);
   const [
     isOpenAddActivityModal,
     closeAddActivityModal,
@@ -79,6 +84,12 @@ const ProfessorRoom = ({ socket }) => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={9}>
+          {activityDone ? (
+            <Paper className={classes.paper}>
+              <RankedStudentsTable />
+            </Paper>
+          ) : null}
+
           <Paper className={classes.paper}>
             <div className={classes.navRight}>
               <div className="">

@@ -23,6 +23,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     color: theme.palette.text.secondary,
   },
   cardStudentLine: {
@@ -162,5 +163,13 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
     justifyContent: 'space-between',
+  },
+  rankedStudentLine: {
+    marginBottom: theme.spacing(2),
+    display: 'flex',
+    borderBottom: `1px solid #BCBCBC`,
+  },
+  rankedStudentLineItem: {
+    flex: '1 1 20%',
   },
 }));
