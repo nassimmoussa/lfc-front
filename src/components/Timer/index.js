@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { differenceInMilliseconds, intervalToDuration } from 'date-fns';
+import {
+  differenceInMilliseconds,
+  intervalToDuration,
+  isAfter,
+} from 'date-fns';
 import { useSelector } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
@@ -21,29 +25,33 @@ const Timer = () => {
   });
 
   useEffect(() => {
-    const myInterval = setInterval(() => {
-      const { seconds, minutes } = duration;
+    if (isAfter(now, finishTime)) {
+      setDuration({ minutes: 0, seconds: 0 });
+    } else {
+      const myInterval = setInterval(() => {
+        const { seconds, minutes } = duration;
 
-      if (seconds > 0) {
-        setDuration({
-          seconds: seconds - 1,
-          minutes,
-        });
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(myInterval);
-        } else {
+        if (seconds > 0) {
           setDuration({
-            minutes: minutes - 1,
-            seconds: 59,
+            seconds: seconds - 1,
+            minutes,
           });
         }
-      }
-    }, 1000);
-    return () => {
-      clearInterval(myInterval);
-    };
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(myInterval);
+          } else {
+            setDuration({
+              minutes: minutes - 1,
+              seconds: 59,
+            });
+          }
+        }
+      }, 1000);
+      return () => {
+        clearInterval(myInterval);
+      };
+    }
   }, [duration]);
 
   const timeLeft = `${formattedMinutes}:${formattedSeconds}`;

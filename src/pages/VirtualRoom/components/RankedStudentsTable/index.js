@@ -9,6 +9,16 @@ import { useStyles } from '../../styles';
 const RankedStudentsTable = () => {
   const classes = useStyles();
   const rankedStudents = useSelector(rankedStudentsSelector);
+  const formatTimeToFinish = ({ minutes, seconds }) => {
+    const formattedMinutes = minutes.toLocaleString('en-us', {
+      minimumIntegerDigits: 2,
+    });
+    const formattedSeconds = seconds.toLocaleString('en-us', {
+      minimumIntegerDigits: 2,
+    });
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
 
   return (
     <div>
@@ -66,19 +76,19 @@ const RankedStudentsTable = () => {
             variant="subtitle1"
             className={classes.rankedStudentLineItem}
           >
-            1
+            {student.correctAnswers}
           </Typography>
           <Typography
             variant="subtitle1"
             className={classes.rankedStudentLineItem}
           >
-            1
+            {student.wrongAnswers}
           </Typography>
           <Typography
             variant="subtitle1"
             className={classes.rankedStudentLineItem}
           >
-            11:20
+            {formatTimeToFinish(student.duration)}
           </Typography>
         </div>
       ))}

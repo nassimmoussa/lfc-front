@@ -40,6 +40,11 @@ export const finishTimeSelector = createSelector(
   (data) => new Date(data.finishTime)
 );
 
+export const startTimeSelector = createSelector(
+  roomDataSelector,
+  (data) => new Date(data.startTime)
+);
+
 export const activityDoneSelector = createSelector(
   roomDataSelector,
   (data) => data.allStudentsDone || data.timeDone
@@ -47,5 +52,7 @@ export const activityDoneSelector = createSelector(
 
 export const rankedStudentsSelector = createSelector(
   studentsSelector,
+  startTimeSelector,
+  finishTimeSelector,
   rankStudents
 );
