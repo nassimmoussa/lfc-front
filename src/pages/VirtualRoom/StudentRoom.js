@@ -11,18 +11,21 @@ import { newLogin } from 'store/modules/room/actions';
 import {
   loggedStudentSelector,
   activityStartedSelector,
+  activityDoneSelector,
 } from 'store/modules/room/selectors';
 
 import StudentList from './components/StudentList';
 
 import StudentLogin from './components/StudentLogin';
 import Activities from './components/Activities';
+import RankedStudentsTable from './components/RankedStudentsTable';
 import { useStyles } from './styles';
 
 const StudentRoom = ({ socket }) => {
   const classes = useStyles();
   const loggedStudent = useSelector(loggedStudentSelector);
   const activityStarted = useSelector(activityStartedSelector);
+  const activityDone = useSelector(activityDoneSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,6 +49,11 @@ const StudentRoom = ({ socket }) => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={9}>
+          {activityDone ? (
+            <Paper className={classes.paper}>
+              <RankedStudentsTable />
+            </Paper>
+          ) : null}
           <Paper className={classes.paper}>
             <div className={classes.studentTimerContainer}>
               <Typography variant="h3">Atividades</Typography>

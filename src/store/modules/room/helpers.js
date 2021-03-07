@@ -1,6 +1,4 @@
 import { differenceInMilliseconds, intervalToDuration } from 'date-fns';
-import groupBy from 'lodash.groupby';
-import flatMap from 'lodash.flatmap';
 
 export const rankStudents = (students, roomStartTime, roomFinishTime) => {
   const studentsWithResponses = students
@@ -23,12 +21,10 @@ export const rankStudents = (students, roomStartTime, roomFinishTime) => {
         timeToFinish,
       };
     })
-    .sort((a, b) => b.correctAnswers - a.correctAnswers);
+    .sort(
+      (a, b) =>
+        b.correctAnswers - a.correctAnswers || b.timeToFinish - a.timeToFinish
+    );
 
-  const groupedByRank = groupBy(studentsWithResponses, (s) => s.correctAnswers);
-  const rankedWithTieBraker = flatMap(groupedByRank, (tiedStudents) =>
-    tiedStudents.sort((a, b) => b.timeToFinish - a.timeToFinish)
-  );
-
-  return rankedWithTieBraker;
+  return studentsWithResponses;
 };
