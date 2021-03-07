@@ -49,7 +49,7 @@ const StudentRoom = ({ socket }) => {
           <Paper className={classes.paper}>
             <div className={classes.studentTimerContainer}>
               <Typography variant="h3">Atividades</Typography>
-              <Timer />
+              {activityStarted ? <Timer /> : null}
             </div>
             {activityStarted ? (
               <Activities socket={socket} />
