@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { useStyles } from '../../styles';
 
-const IfActivity = ({ lE, onResponse, studentResponse }) => {
+const IfActivity = ({ lE, onResponse, studentResponse, activityDone }) => {
   const classes = useStyles();
 
   const renderVariables = () =>
@@ -79,7 +79,7 @@ const IfActivity = ({ lE, onResponse, studentResponse }) => {
             color="primary"
             className={getFirstButtonClasses()}
             onClick={() => onResponse('FIRST')}
-            disabled={!!studentResponse}
+            disabled={!!studentResponse || activityDone}
           >
             Bloco a ser executado
           </Button>
@@ -91,7 +91,7 @@ const IfActivity = ({ lE, onResponse, studentResponse }) => {
             color="primary"
             className={getSecondButtonClasses()}
             onClick={() => onResponse('SECOND')}
-            disabled={!!studentResponse}
+            disabled={!!studentResponse || activityDone}
           >
             Bloco a ser executado
           </Button>

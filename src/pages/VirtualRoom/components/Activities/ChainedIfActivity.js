@@ -7,7 +7,13 @@ import Paper from '@material-ui/core/Paper';
 
 import { useStyles } from '../../styles';
 
-const ChainedIfActivity = ({ lE, lE2, onResponse, studentResponse }) => {
+const ChainedIfActivity = ({
+  lE,
+  lE2,
+  onResponse,
+  studentResponse,
+  activityDone,
+}) => {
   const classes = useStyles();
 
   const renderVariables = () => {
@@ -98,7 +104,7 @@ const ChainedIfActivity = ({ lE, lE2, onResponse, studentResponse }) => {
             color="primary"
             onClick={() => onResponse('FIRST')}
             className={getFirstButtonClasses()}
-            disabled={!!studentResponse}
+            disabled={!!studentResponse || activityDone}
           >
             Bloco a ser executado
           </Button>
@@ -110,7 +116,7 @@ const ChainedIfActivity = ({ lE, lE2, onResponse, studentResponse }) => {
             color="primary"
             onClick={() => onResponse('SECOND')}
             className={getSecondButtonClasses()}
-            disabled={!!studentResponse}
+            disabled={!!studentResponse || activityDone}
           >
             Bloco a ser executado
           </Button>
@@ -122,7 +128,7 @@ const ChainedIfActivity = ({ lE, lE2, onResponse, studentResponse }) => {
             color="primary"
             onClick={() => onResponse('THIRD')}
             className={getThirdButtonClasses()}
-            disabled={!!studentResponse}
+            disabled={!!studentResponse || activityDone}
           >
             Bloco a ser executado
           </Button>

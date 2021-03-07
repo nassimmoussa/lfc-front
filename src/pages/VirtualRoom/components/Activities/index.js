@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import {
   activitySelector,
   loggedStudentDataSelector,
+  activityDoneSelector,
 } from 'store/modules/room/selectors';
 import { roomUpdate } from 'store/modules/room/actions';
 
@@ -20,6 +21,7 @@ const Activities = ({ socket }) => {
   const { roomId } = useParams();
   const activitiesList = useSelector(activitySelector);
   const student = useSelector(loggedStudentDataSelector);
+  const activityDone = useSelector(activityDoneSelector);
   const dispatch = useDispatch();
 
   const studentResponseHandler = (response, activity) => {
@@ -47,6 +49,7 @@ const Activities = ({ socket }) => {
           lE={activity.logicExpression}
           onResponse={(response) => studentResponseHandler(response, activity)}
           studentResponse={studentResponse}
+          activityDone={activityDone}
         />
       );
     if (activity.activityType === ACTIVITY_TYPES.IF)
@@ -55,6 +58,7 @@ const Activities = ({ socket }) => {
           lE={activity.logicExpression}
           onResponse={(result) => studentResponseHandler(result, activity)}
           studentResponse={studentResponse}
+          activityDone={activityDone}
         />
       );
     return (
@@ -63,6 +67,7 @@ const Activities = ({ socket }) => {
         lE2={activity.logicExpression2}
         onResponse={(result) => studentResponseHandler(result, activity)}
         studentResponse={studentResponse}
+        activityDone={activityDone}
       />
     );
   };

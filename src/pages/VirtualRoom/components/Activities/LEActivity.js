@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { useStyles } from '../../styles';
 
-const LEActivity = ({ lE, onResponse, studentResponse }) => {
+const LEActivity = ({ lE, onResponse, studentResponse, activityDone }) => {
   const classes = useStyles();
 
   const getTrueButtonClasses = () => {
@@ -91,7 +91,7 @@ const LEActivity = ({ lE, onResponse, studentResponse }) => {
             color="primary"
             className={getTrueButtonClasses()}
             onClick={() => onResponse('TRUE')}
-            disabled={!!studentResponse}
+            disabled={!!studentResponse || activityDone}
           >
             Verdadeiro
           </Button>
@@ -100,7 +100,7 @@ const LEActivity = ({ lE, onResponse, studentResponse }) => {
             color="secondary"
             className={getFalseButtonClasses()}
             onClick={() => onResponse('FALSE')}
-            disabled={!!studentResponse}
+            disabled={!!studentResponse || activityDone}
           >
             Falso
           </Button>
