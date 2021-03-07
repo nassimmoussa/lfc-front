@@ -25,36 +25,34 @@ const Timer = () => {
   });
 
   useEffect(() => {
-    if (isAfter(now, finishTime)) {
-      setDuration({ minutes: 0, seconds: 0 });
-    } else {
-      const myInterval = setInterval(() => {
-        const { seconds, minutes } = duration;
+    const myInterval = setInterval(() => {
+      const { seconds, minutes } = duration;
 
-        if (seconds > 0) {
+      if (seconds > 0) {
+        setDuration({
+          seconds: seconds - 1,
+          minutes,
+        });
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(myInterval);
+        } else {
           setDuration({
-            seconds: seconds - 1,
-            minutes,
+            minutes: minutes - 1,
+            seconds: 59,
           });
         }
-        if (seconds === 0) {
-          if (minutes === 0) {
-            clearInterval(myInterval);
-          } else {
-            setDuration({
-              minutes: minutes - 1,
-              seconds: 59,
-            });
-          }
-        }
-      }, 1000);
-      return () => {
-        clearInterval(myInterval);
-      };
-    }
+      }
+    }, 1000);
+    return () => {
+      clearInterval(myInterval);
+    };
   }, [duration]);
 
-  const timeLeft = `${formattedMinutes}:${formattedSeconds}`;
+  const timeLeft = isAfter(now, finishTime)
+    ? '00:00'
+    : `${formattedMinutes}:${formattedSeconds}`;
 
   return (
     <TextField
